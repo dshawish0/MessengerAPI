@@ -7,9 +7,7 @@ using System.Threading.Tasks;
 
 namespace MessengerAPI.Controllers
 {
-    [ApiController]////
-
-
+    [ApiController]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
