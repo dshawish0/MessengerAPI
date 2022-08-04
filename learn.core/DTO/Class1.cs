@@ -4,7 +4,7 @@ using System.Text;
 
 namespace learn.core.DTO
 {
-    internal class Class1
+    public class Class1
     {
     }
 }
