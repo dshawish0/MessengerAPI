@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Folder Include="Data\" />
+    <Folder Include="DTO\" />
     <Folder Include="Repoisitory\" />
     <Folder Include="Service\" />
   </ItemGroup>
