@@ -11,7 +11,6 @@ namespace learn.infra.domain
 {
     public class DbContext : IDBContext
     {
-        //test test test 
         private DbConnection connection;
         private IConfiguration configuration;
 
