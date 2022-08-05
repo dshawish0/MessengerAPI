@@ -27,8 +27,10 @@ namespace MessengerAPI
             services.AddScoped<IDBContext, DbContext>();
 
             services.AddScoped<IServicesRepository, ServicesRepository>();
+            services.AddScoped<IPaymentRepository, PaymentRepository>();
 
             services.AddScoped<IServicesService, ServicesService>();
+            services.AddScoped<IPaymentService, PaymentService>();
 
             services.AddControllers();
         }

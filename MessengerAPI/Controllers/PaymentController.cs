@@ -3,27 +3,26 @@ using learn.core.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 
 namespace MessengerAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ServicesController : ControllerBase
+    public class PaymentController : ControllerBase
     {
-        private readonly IServicesService servicesService;
+        private readonly IPaymentService paymentService;
 
-        public ServicesController(IServicesService servicesService)
+        public PaymentController(IPaymentService paymentService)
         {
-            this.servicesService = servicesService;
+            this.paymentService = paymentService;
         }
         [HttpGet]
-        [Route("GetAllServices")]
-        public IActionResult GetAllServices()
+        [Route("GetAllPayment")]
+        public IActionResult GetAllPayment()
         {
             try
             {
-                var result = servicesService.GetAllServices();
+                var result = paymentService.GetAllPayments();
                 return Ok(result);
             }
             catch (Exception e)
@@ -32,27 +31,26 @@ namespace MessengerAPI.Controllers
             }
         }
         [HttpGet]
-        [Route("GetServiseById/{id}")]
-        public IActionResult GetServiseById(int id)
+        [Route("GetPaymentById/{id}")]
+        public IActionResult GetPaymentById(int id)
         {
             try
             {
-                var result = servicesService.GetServiceById(id);
+                var result = paymentService.GetPaymentsById(id);
                 return Ok(result);
             }
-            catch (Exception e) 
+            catch (Exception e)
             {
                 return NotFound(e.Message);
             }
         }
-
         [HttpPost]
-        [Route("AddServices")]
-        public IActionResult AddServices([FromBody] Services services)
+        [Route("AddPayment")]
+        public IActionResult AddPayment([FromBody] Payments payment)
         {
             try
             {
-                servicesService.AddServices(services);
+                paymentService.AddPayments(payment);
                 return Ok();
             }
             catch (Exception e)
@@ -60,14 +58,13 @@ namespace MessengerAPI.Controllers
                 return NotFound(e.Message);
             }
         }
-
         [HttpPut]
-        [Route("UpDateServices")]
-        public IActionResult UpDateServices([FromBody] Services services)
+        [Route("UpDatePayment")]
+        public IActionResult UpDatePayment([FromBody] Payments payment)
         {
             try
             {
-                servicesService.UpDateServices(services);
+                paymentService.UpDatePayments(payment);
                 return Ok();
             }
             catch (Exception e)
@@ -76,12 +73,12 @@ namespace MessengerAPI.Controllers
             }
         }
         [HttpDelete]
-        [Route("DeleteServices")]
-        public IActionResult DeleteServices([FromBody] Services services)
+        [Route("DeletePayment")]
+        public IActionResult DeletePayment([FromBody] Payments payment)
         {
             try
             {
-                servicesService.DeleteServices(services.Serviceid);
+                paymentService.DeletePayments(payment.Paymentid);
                 return Ok();
             }
             catch (Exception e)
