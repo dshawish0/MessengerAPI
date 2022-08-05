@@ -4,6 +4,10 @@ using learn.core.Service;
 using learn.infra.domain;
 using learn.infra.Repoisitory;
 using learn.infra.Service;
+using Messenger.core.Repoisitory;
+using Messenger.core.Service;
+using Messenger.infra.Repoisitory;
+using Messenger.infra.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -27,15 +31,17 @@ namespace MessengerAPI
             services.AddScoped<IDBContext, DbContext>();
 
             services.AddScoped<IServicesRepository, ServicesRepository>();
-            
-
             services.AddScoped<IServicesService, ServicesService>();
 
+            services.AddScoped<ILoginRepository, LoginRepository>();
+            services.AddScoped<ILoginService, LoginService>();
 
-            
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, UserService>();
             
             services.AddScoped<IPaymentRepository, PaymentRepository>();
             services.AddScoped<IPaymentService, PaymentService>();
+
             services.AddControllers();
         }
 
