@@ -16,19 +16,19 @@ namespace learn.infra.Service
             this.servicesRepository = servicesRepository;
         }
 
-        public void AddServices(Services services, string httpMethod)
+        public void AddServices(Services services)
         {
-            servicesRepository.AddServices(services, httpMethod);
+            servicesRepository.AddServices(services);
         }
 
-        public void DeleteServices(int id, string httpMethod)
+        public void DeleteServices(int id)
         {
-            servicesRepository.DeleteServices(id, httpMethod);
+            servicesRepository.DeleteServices(id);
         }
 
-        public IList<Services> GetAllServices(string httpMethod)
+        public IList<Services> GetAllServices()
         {
-            return servicesRepository.GetAllServices(httpMethod);
+            return servicesRepository.GetAllServices();
         }
 
         public Services GetServiceById(int id)
@@ -36,9 +36,9 @@ namespace learn.infra.Service
             return servicesRepository.GetServiceById(id);
         }
 
-        public void UpDateServices(Services services, string httpMethod)
+        public void UpDateServices(Services services)
         {
-            servicesRepository.UpDateServices(services, httpMethod);
+            servicesRepository.UpDateServices(services);
         }
     }
 }
