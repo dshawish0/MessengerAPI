@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31112.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessengerAPI", "MessengerAPI\MessengerAPI.csproj", "{2E65B035-2C11-4E6D-9199-9175E28D4B53}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessengerAPI", "MessengerAPI\MessengerAPI.csproj", "{2E65B035-2C11-4E6D-9199-9175E28D4B53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "learn.core", "learn.core\learn.core.csproj", "{25F90657-FCAA-4759-9286-FB1BA38CE77C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messenger.core", "learn.core\Messenger.core.csproj", "{25F90657-FCAA-4759-9286-FB1BA38CE77C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "learn.infra", "learn.infra\learn.infra.csproj", "{69771467-F5AF-4FB8-9D78-ED4D7665B502}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messenger.infra", "learn.infra\Messenger.infra.csproj", "{69771467-F5AF-4FB8-9D78-ED4D7665B502}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
