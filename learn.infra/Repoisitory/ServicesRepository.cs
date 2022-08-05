@@ -18,7 +18,8 @@ namespace learn.infra.Repoisitory
         {
             this.dbContext = dbContext;
         }
-        public T CrudServices<T>(Services services, string httpMethod)
+
+        public void AddServices(Services services, string httpMethod)
         {
             var p = new DynamicParameters();
             p.Add("@crud", httpMethod, dbType: DbType.String, direction: ParameterDirection.Input);
@@ -26,37 +27,17 @@ namespace learn.infra.Repoisitory
             p.Add("@SName", services.Servicename, dbType: DbType.String, direction: ParameterDirection.Input);
             p.Add("@PPrice", services.Preprice, dbType: DbType.Decimal, direction: ParameterDirection.Input);
             p.Add("@SPrice", services.Saleprice, dbType: DbType.Decimal, direction: ParameterDirection.Input);
-            
 
-            switch (httpMethod)
-            {
-                case "G":
-                    {
-                        List<Services> result = dbContext.dbConnection.Query<Services>("ServicesCrud_Package.ServicesCrud", p, commandType: System.Data.CommandType.StoredProcedure).ToList();
-                        return (T)Convert.ChangeType(result, typeof(T));
-                    }
-                //case "C":
-                //    {
-                //        var result = dbContext.dbConnection.ExecuteAsync("ServicesCrud_Package.ServicesCrud", p, commandType: CommandType.StoredProcedure);
-                //        return (T)Convert.ChangeType(true, typeof(T));
-                //    }
-                //case "D":
-                //    {
-                //        dbContext.dbConnection.ExecuteAsync("ServicesCrud_Package.ServicesCrud", p, commandType: CommandType.StoredProcedure);
-                //        return (T)Convert.ChangeType(true, typeof(T));
-                //    }
-                //case "U":
-                //    {
-                //        var result = dbContext.dbConnection.ExecuteAsync("ServicesCrud_Package.ServicesCrud", p, commandType: CommandType.StoredProcedure);
-                //        return (T)Convert.ChangeType(true, typeof(T));
-                //    }
-                default:
-                    {
-                        var result = dbContext.dbConnection.ExecuteAsync("ServicesCrud_Package.ServicesCrud", p, commandType: CommandType.StoredProcedure);
-                        return (T)Convert.ChangeType(true, typeof(T));
-                    }
-            }
-            //return (T)Convert.ChangeType(value, typeof(T));
+            dbContext.dbConnection.ExecuteAsync("ServicesCrud_Package.ServicesCrud", p, commandType: CommandType.StoredProcedure);
+        }
+
+        public IList<Services> GetAllServices(string httpMethod)
+        {
+            var p = new DynamicParameters();
+            p.Add("@crud", httpMethod, dbType: DbType.String, direction: ParameterDirection.Input);
+
+            List<Services> result = dbContext.dbConnection.Query<Services>("ServicesCrud_Package.ServicesCrud", p, commandType: System.Data.CommandType.StoredProcedure).ToList();
+            return result;
         }
 
         public Services GetServiceById(int id)
@@ -68,6 +49,27 @@ namespace learn.infra.Repoisitory
             return result.FirstOrDefault();
 
 
+        }
+
+        public void DeleteServices(int id, string httpMethod)
+        {
+            var p = new DynamicParameters();
+            p.Add("@crud", httpMethod, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("@id", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            dbContext.dbConnection.ExecuteAsync("ServicesCrud_Package.ServicesCrud", p, commandType: CommandType.StoredProcedure);
+
+        }
+
+        public void UpDateServices(Services services, string httpMethod)
+        {
+            var p = new DynamicParameters();
+            p.Add("@crud", httpMethod, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("@id", services.Serviceid, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("@SName", services.Servicename, dbType: DbType.String, direction: ParameterDirection.Input);
+            p.Add("@PPrice", services.Preprice, dbType: DbType.Decimal, direction: ParameterDirection.Input);
+            p.Add("@SPrice", services.Saleprice, dbType: DbType.Decimal, direction: ParameterDirection.Input);
+
+            dbContext.dbConnection.ExecuteAsync("ServicesCrud_Package.ServicesCrud", p, commandType: CommandType.StoredProcedure);
         }
     }
 }
