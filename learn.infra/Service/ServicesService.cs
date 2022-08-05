@@ -15,14 +15,30 @@ namespace learn.infra.Service
         {
             this.servicesRepository = servicesRepository;
         }
-        public T CrudServices<T>(Services services, string httpMethod)
+
+        public void AddServices(Services services, string httpMethod)
         {
-            return servicesRepository.CrudServices<T>(services, httpMethod);
+            servicesRepository.AddServices(services, httpMethod);
+        }
+
+        public void DeleteServices(int id, string httpMethod)
+        {
+            servicesRepository.DeleteServices(id, httpMethod);
+        }
+
+        public IList<Services> GetAllServices(string httpMethod)
+        {
+            return servicesRepository.GetAllServices(httpMethod);
         }
 
         public Services GetServiceById(int id)
         {
             return servicesRepository.GetServiceById(id);
+        }
+
+        public void UpDateServices(Services services, string httpMethod)
+        {
+            servicesRepository.UpDateServices(services, httpMethod);
         }
     }
 }

@@ -17,25 +17,19 @@ namespace MessengerAPI.Controllers
         {
             this.servicesService = servicesService;
         }
-        [Route("CrudService/{req}")]
-        public IActionResult CrudService([FromBody] Services services, string req)
+        [HttpGet]
+        [Route("GetAllServices/{req}")]
+        public IActionResult GetAllServices(string req)
         {
-
-            switch (req)
+            try
             {
-                case "G":
-                    {
-                        var result = servicesService.CrudServices<List<Services>>(services, req);
-                        return Ok(result);
-                    }
-                default:
-                    {
-                        var result = servicesService.CrudServices<bool>(services, req);
-                        return Ok(result);
-                    }
-
+                var result = servicesService.GetAllServices(req);
+                return Ok(result);
             }
-
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
         }
         [HttpGet]
         [Route("GetServiseById/{id}")]
@@ -47,6 +41,50 @@ namespace MessengerAPI.Controllers
                 return Ok(result);
             }
             catch (Exception e) 
+            {
+                return NotFound(e.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("AddServices/{req}")]
+        public IActionResult AddServices([FromBody] Services services, string req)
+        {
+            try
+            {
+                servicesService.AddServices(services, req);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
+        }
+
+        [HttpPut]
+        [Route("UpDateServices/{req}")]
+        public IActionResult UpDateServices([FromBody] Services services, string req)
+        {
+            try
+            {
+                servicesService.UpDateServices(services, req);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
+        }
+        [HttpDelete]
+        [Route("DeleteServices/{req}")]
+        public IActionResult DeleteServices([FromBody] Services services, string req)
+        {
+            try
+            {
+                servicesService.DeleteServices(services.Serviceid, req);
+                return Ok();
+            }
+            catch (Exception e)
             {
                 return NotFound(e.Message);
             }
