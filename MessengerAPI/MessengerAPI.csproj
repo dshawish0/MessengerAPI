@@ -5,8 +5,8 @@
   </PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\learn.core\learn.core.csproj" />
-		<ProjectReference Include="..\learn.infra\learn.infra.csproj" />
+		<ProjectReference Include="..\learn.core\Messenger.core.csproj" />
+		<ProjectReference Include="..\learn.infra\Messenger.infra.csproj" />
 	</ItemGroup>
 
 
