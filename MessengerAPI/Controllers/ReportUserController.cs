@@ -23,7 +23,7 @@ namespace MessengerAPI.Controllers
             return reportUserService.GetReportUsers();
         }
         [HttpGet]
-        [Route("GetReportUsersById")]
+        [Route("GetReportUsersById/{id}")]
         public List<ReportUser> GetReportUsersById(int id)
         {
             return reportUserService.GetReportUsersById(id);

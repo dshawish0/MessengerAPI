@@ -1,4 +1,5 @@
 ﻿using learn.core.Data;
+using learn.core.Repoisitory;
 using learn.core.Service;
 using System;
 using System.Collections.Generic;
@@ -8,35 +9,35 @@ namespace learn.infra.Service
 {
     public class GroupMemberService: IGroupMemberService
     {
-        private readonly IGroupMemberService groupMemberService;
-        public GroupMemberService(IGroupMemberService _groupMemberService)
+        private readonly IGroupMemberRepoisitory groupMemberRepoisitory;
+        public GroupMemberService(IGroupMemberRepoisitory groupMemberRepoisitory)
         {
-            this.groupMemberService = _groupMemberService;
+            this.groupMemberRepoisitory = groupMemberRepoisitory;
         }
 
         public bool DeleteGroupMember(int id)
         {
-            return groupMemberService.DeleteGroupMember(id);
+            return groupMemberRepoisitory.DeleteGroupMember(id);
         }
 
         public List<GroupMember> GetGroupMember()
         {
-            return groupMemberService.GetGroupMember();
+            return groupMemberRepoisitory.GetGroupMember();
         }
 
         public List<GroupMember> GetGroupMemberById(int id)
         {
-            return groupMemberService.GetGroupMemberById(id);
+            return groupMemberRepoisitory.GetGroupMemberById(id);
         }
 
         public bool InsertGroupMember(GroupMember groupMember)
         {
-            return groupMemberService.InsertGroupMember(groupMember);
+            return groupMemberRepoisitory.InsertGroupMember(groupMember);
         }
 
         public bool UpdateGroupMember(GroupMember groupMember)
         {
-            return groupMemberService.UpdateGroupMember(groupMember);
+            return groupMemberRepoisitory.UpdateGroupMember(groupMember);
         }
     }
 }
