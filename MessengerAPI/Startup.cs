@@ -1,5 +1,9 @@
 using learn.core.domain;
+using learn.core.Repoisitory;
+using learn.core.Service;
 using learn.infra.domain;
+using learn.infra.Repoisitory;
+using learn.infra.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -21,6 +25,11 @@ namespace MessengerAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IDBContext, DbContext>();
+
+            services.AddScoped<IServicesRepository, ServicesRepository>();
+
+            services.AddScoped<IServicesService, ServicesService>();
+
             services.AddControllers();
         }
 
