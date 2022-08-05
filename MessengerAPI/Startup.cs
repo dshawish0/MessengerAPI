@@ -42,6 +42,12 @@ namespace MessengerAPI
             services.AddScoped<IPaymentRepository, PaymentRepository>();
             services.AddScoped<IPaymentService, PaymentService>();
 
+            services.AddScoped<IReportUserRepoisitory, ReportUserRepoisitory>();
+            services.AddScoped<IReportUserService, ReportUserService>();
+
+            services.AddScoped<IGroupMemberRepoisitory, GroupMemberRepoisitory>();
+            services.AddScoped<IGroupMemberService, GroupMemberService>();
+
             services.AddControllers();
         }
 
