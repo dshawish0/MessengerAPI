@@ -4,4 +4,10 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Repoisitory\**" />
+    <EmbeddedResource Remove="Repoisitory\**" />
+    <None Remove="Repoisitory\**" />
+  </ItemGroup>
+
 </Project>

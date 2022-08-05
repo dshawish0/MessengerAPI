@@ -6,14 +6,15 @@ using System.Text;
 
 namespace learn.core.Data
 {
-    public class ReportUser
+    public class GroupMember
     {
         [Key]
-        public int ReportUserId { get; set; }
-        public int UserReportedId { get; set; }
-        public string ReportText { get; set; }
-        public int Status { get; set; }
-        public DateTime ReportDate { get; set; }
+        public int GroupMemberId { get; set; }
+        public DateTime JoinDate { get; set; }
+        public DateTime LeftDate { get; set; }
+        public int MessageGroupId { get; set; }
+        //[ForeignKey("MessageGroupId")]
+        //public virtual MessageGroup MessageGroup { get; set; }
         public int User_Id { get; set; }
         //[ForeignKey("User_Id")]
         //public virtual User User { get; set; }
