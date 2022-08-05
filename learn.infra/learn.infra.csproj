@@ -21,10 +21,5 @@
 		<ProjectReference Include="..\learn.core\learn.core.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Repoisitory\" />
-	  <Folder Include="Service\" />
-	</ItemGroup>
-
 
 </Project>
