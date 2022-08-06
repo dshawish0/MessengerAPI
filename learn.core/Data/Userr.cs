@@ -14,5 +14,6 @@ namespace Messenger.core.Data
         public int IsBlocked { get; set; }
         public int IsActive { get; set; }
         public string UserBio { get; set; }
+        public string userName { get; set; }
     }
 }

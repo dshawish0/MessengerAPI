@@ -10,7 +10,7 @@ namespace learn.core.Data
         public int Userreceiveid { get; set; }
         public int Status { get; set; }
         public DateTime Adddate { get; set; }
-        public int? UserId { get; set; }
+        public int? User_Id { get; set; }
 
         //public virtual User User { get; set; }
     }

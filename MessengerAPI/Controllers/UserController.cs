@@ -15,25 +15,48 @@ namespace MessengerAPI.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService userService;
+        private readonly ILoginService loginService;
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, ILoginService loginService)
         {
             this.userService = userService;
+            this.loginService = loginService;
         }
 
         [HttpPost]
         public IActionResult InsertUser([FromBody] UserLogDTO userlog)
         {
             var result = userService.InsertUser(userlog);
-            Console.WriteLine(userlog.UserId);
-            Console.WriteLine(userlog.User_Id);
 
-            Login log = new Login();
-            log.Email = userlog.Email;
-            log.Password = userlog.Password;
-            log.User_Id = userlog.User_Id;
+            userlog.UserId = userService.GetUserByUserName(userlog.userName).UserId;
+            loginService.InsertLog(userlog);
+
+
 
             return Ok(result);
+        }
+
+        [HttpDelete("DeleteUser/{UserId}")]
+        public IActionResult DeleteCourse(int UserId)
+        {
+            return Ok(userService.DeleteUser(UserId));
+        }
+
+        [HttpGet]
+        public List<Userr> GetAllUsers()
+        {
+            return userService.GetAllUsers();
+        }
+
+        [HttpPut]
+        public bool UpdateUser([FromBody] Userr user)
+        {
+            return userService.UpdateUser(user);
+        }
+        [HttpGet("{id}")]
+        public Userr course(int userId)
+        {
+            return userService.GetUserById(userId);
         }
     }
 }

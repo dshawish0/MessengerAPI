@@ -55,19 +55,36 @@ namespace Messenger.infra.Repoisitory
             return result.FirstOrDefault();
         }
 
+        public Userr GetUserByUserName(string userName)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add("@UuserName", userName, dbType: DbType.String, direction: ParameterDirection.Input);
+
+            IEnumerable<Userr> result = dBContext.dbConnection.Query<Userr>
+                ("UserrCRUD_Package.getByUserName", parameter, commandType: CommandType.StoredProcedure);
+            return result.FirstOrDefault();
+        }
+
         public bool InsertUser(UserLogDTO userLog)
         {
             var parameter = new DynamicParameters();
             parameter.Add
-               ("crud","C", dbType: DbType.String, direction: ParameterDirection.Input);
+               ("@crud","C", dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add
-               ("FFname", userLog.Fname, dbType: DbType.String, direction: ParameterDirection.Input);
+               ("@FFname", userLog.Fname, dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add
-               ("LLname", userLog.Lname, dbType: DbType.String, direction: ParameterDirection.Input);
+               ("@LLname", userLog.Lname, dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add
-                ("PProFileImg", userLog.ProFileImg, dbType: DbType.String, direction: ParameterDirection.Input);
+                ("@PProFileImg", userLog.ProFileImg, dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add
-               ("GGender", userLog.Gender, dbType: DbType.String, direction: ParameterDirection.Input);
+               ("@GGender", userLog.Gender, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add
+               ("@IIsBlocked", 0, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add
+               ("@IIsActive", 0, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add
+              ("@UuserName", userLog.userName, dbType: DbType.String, direction: ParameterDirection.Input);
+
 
             var result = dBContext.dbConnection.ExecuteAsync
                 ("UserrCRUD_Package.UserrCRUD", parameter, commandType: CommandType.StoredProcedure);
@@ -94,6 +111,8 @@ namespace Messenger.infra.Repoisitory
                ("GGender", user.Gender, dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add
               ("UUserBio", user.UserBio, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add
+              ("@UuserName", user.userName, dbType: DbType.String, direction: ParameterDirection.Input);
 
 
             var result = dBContext.dbConnection.ExecuteAsync
