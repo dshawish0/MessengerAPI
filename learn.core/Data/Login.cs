@@ -11,5 +11,6 @@ namespace Messenger.core.Data
         public string Password { get; set; }
         public int User_Id { get; set; }
         public int RoleId { get; set; }
+        public string userName { get; set; }
     }
 }

@@ -8,11 +8,14 @@ using Messenger.core.Repoisitory;
 using Messenger.core.Service;
 using Messenger.infra.Repoisitory;
 using Messenger.infra.Service;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace MessengerAPI
 {
@@ -50,6 +53,29 @@ namespace MessengerAPI
 
             services.AddScoped<IFrindRepository, FrindRepository>();
             services.AddScoped<IFrindService, FrindService>();
+
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }
+
+           ).AddJwtBearer(y =>
+           {
+               y.RequireHttpsMetadata = false;
+               y.SaveToken = true;
+               y.TokenValidationParameters = new TokenValidationParameters
+               {
+                   ValidateIssuerSigningKey = true,
+                   IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("[SECRET Used To Sign And Verify Jwt Token,It can be any string]")),
+                   ValidateIssuer = false,
+                   ValidateAudience = false,
+
+               };
+
+
+           });
 
             services.AddControllers();
         }

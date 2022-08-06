@@ -11,5 +11,7 @@ namespace Messenger.core.Service
         public List<Login> GetAllLog();
         public bool InsertLog(UserLogDTO userLog);
         public bool UpdateLog(Login userLog);
+        public string Authentication_jwt(Login login);
+
     }
 }

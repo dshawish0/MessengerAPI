@@ -13,5 +13,7 @@ namespace Messenger.core.Service
         public bool DeleteUser(int UserId);
         public bool UpdateUser(Userr user);
         public Userr GetUserById(int userId);
+        public Userr GetUserByUserName(string userName);
+
     }
 }
