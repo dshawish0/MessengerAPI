@@ -9,6 +9,6 @@ namespace Messenger.core.DTO
         public string Email { get; set; }
         public string userName { get; set; }
         public string roleName { get; set; }
-        public int UserId { get; set; }
+        public int User_Id { get; set; }
     }
 }

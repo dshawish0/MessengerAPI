@@ -37,7 +37,7 @@ namespace Messenger.infra.Service
                          new Claim(ClaimTypes.Email, result.Email),
                          new Claim(ClaimTypes.Role, result.roleName),
                          new Claim(ClaimTypes.Name, result.userName),
-                         new Claim(ClaimTypes.NameIdentifier,result.UserId.ToString())
+                         new Claim(ClaimTypes.NameIdentifier,result.User_Id.ToString())
                      }
                     ),
                 Expires = DateTime.UtcNow.AddHours(1),
