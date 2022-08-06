@@ -32,6 +32,11 @@ namespace Messenger.infra.Service
             return UserRepository.GetUserById(userId);
         }
 
+        public Userr GetUserByUserName(string userName)
+        {
+            return UserRepository.GetUserByUserName(userName);
+        }
+
         public bool InsertUser(UserLogDTO userLog)
         {
             return UserRepository.InsertUser(userLog);
