@@ -54,7 +54,13 @@ namespace MessengerAPI
             services.AddScoped<IFrindRepository, FrindRepository>();
             services.AddScoped<IFrindService, FrindService>();
 
+            services.AddScoped<IMessageGroupRepoisitory, MessageGroupRepoisitory>();
+            services.AddScoped<IMessageGroupservice, MessageGroupservice>();
 
+            services.AddScoped<IMessageRepoisitory, MessageRepoisitory>();
+            services.AddScoped<IMessageservice, Messageservice>();
+            
+            
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
