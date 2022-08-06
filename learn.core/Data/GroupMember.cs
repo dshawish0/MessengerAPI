@@ -14,8 +14,8 @@ namespace learn.core.Data
         public DateTime JoinDate { get; set; }
         public DateTime LeftDate { get; set; }
         public int MessageGroupId { get; set; }
-        //[ForeignKey("MessageGroupId")]
-        //public virtual MessageGroup MessageGroup { get; set; }
+        [ForeignKey("MessageGroupId")]
+        public virtual MessageGroup MessageGroup { get; set; }
         public int User_Id { get; set; }
         [ForeignKey("User_Id")]
         public virtual Userr Userr { get; set; }

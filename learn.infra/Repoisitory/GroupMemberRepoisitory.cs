@@ -72,7 +72,7 @@ namespace learn.infra.Repoisitory
         public bool UpdateGroupMember(GroupMember groupMember)
         {
             var parameter = new DynamicParameters();
-            parameter.Add("crud", "C", dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("crud", "U", dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add("GGroupMemberId", groupMember.GroupMemberId, dbType: DbType.Int32, direction: ParameterDirection.Input);
             parameter.Add("JJoinDate", groupMember.JoinDate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
             parameter.Add("LLeftDate", groupMember.LeftDate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
