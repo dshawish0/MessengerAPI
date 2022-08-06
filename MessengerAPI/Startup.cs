@@ -60,6 +60,9 @@ namespace MessengerAPI
             services.AddScoped<IMessageRepoisitory, MessageRepoisitory>();
             services.AddScoped<IMessageservice, Messageservice>();
             
+            services.AddScoped<IDtoRepository, DtoRepository>();
+            services.AddScoped<IDtoService, DtoService>();
+            
             
             services.AddAuthentication(x =>
             {
