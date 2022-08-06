@@ -31,18 +31,18 @@ namespace MessengerAPI.Controllers
 
         [HttpPost]
         [Route("InsertReportUser")]
-        public bool InsertReportUser(ReportUser report)
+        public bool InsertReportUser([FromBody]ReportUser report)
         {
             return reportUserService.InsertReportUser(report);
         }
         [HttpPut]
         [Route("UpdateReportUser")]
-        public bool UpdateReportUser(ReportUser report)
+        public bool UpdateReportUser([FromBody] ReportUser report)
         {
             return reportUserService.UpdateReportUser(report);
         }
         [HttpDelete]
-        [Route("DeleteReportUser")]
+        [Route("DeleteReportUser/{id}")]
         public bool DeleteReportUser(int id)
         {
             return reportUserService.DeleteReportUser(id);

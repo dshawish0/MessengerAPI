@@ -41,7 +41,7 @@ namespace MessengerAPI.Controllers
             return groupMemberService.UpdateGroupMember(groupMember);
         }
         [HttpDelete]
-        [Route("DeleteGroupMember")]
+        [Route("DeleteGroupMember/{id}")]
         public bool DeleteGroupMember(int id)
         {
             return groupMemberService.DeleteGroupMember(id);
