@@ -36,7 +36,7 @@ namespace MessengerAPI.Controllers
         {
             try
             {
-                var result = frindService.GetFrindById((int)frind.UserId, frind.Userreceiveid);
+                var result = frindService.GetFrindById((int)frind.User_Id, frind.Userreceiveid);
                 return Ok(result);
             }
             catch (Exception e)
@@ -78,7 +78,7 @@ namespace MessengerAPI.Controllers
         {
             try
             {
-                frindService.DeleteFrind((int)frind.UserId, frind.Userreceiveid);
+                frindService.DeleteFrind((int)frind.User_Id, frind.Userreceiveid);
                 return Ok();
             }
             catch (Exception e)

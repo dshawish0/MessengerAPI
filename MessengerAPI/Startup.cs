@@ -48,6 +48,9 @@ namespace MessengerAPI
             services.AddScoped<IGroupMemberRepoisitory, GroupMemberRepoisitory>();
             services.AddScoped<IGroupMemberService, GroupMemberService>();
 
+            services.AddScoped<IFrindRepository, FrindRepository>();
+            services.AddScoped<IFrindService, FrindService>();
+
             services.AddControllers();
         }
 
