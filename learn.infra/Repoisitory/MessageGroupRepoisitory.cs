@@ -57,8 +57,9 @@ namespace learn.infra.Repoisitory
         public List<MessageGroup> GetAllMessageGroup()
         {
             var parameter = new DynamicParameters();
-            parameter.Add("crud", "G", dbType: DbType.Int32, direction: ParameterDirection.Input);
-            IEnumerable<MessageGroup> result = dBContext.dbConnection.Query<MessageGroup>("MessageGroupCRUD_Package.MessageGroupCRUD", commandType: CommandType.StoredProcedure);
+            parameter.Add("crud", "G", dbType: DbType.String, direction: ParameterDirection.Input);
+
+            IEnumerable<MessageGroup> result = dBContext.dbConnection.Query<MessageGroup>("MessageGroupCRUD_Package.MessageGroupCRUD", parameter, commandType: CommandType.StoredProcedure);
             return result.ToList();
         }
 
@@ -76,6 +77,7 @@ namespace learn.infra.Repoisitory
         {
             var parameter = new DynamicParameters();
             parameter.Add("crud", "U", dbType: DbType.String, direction: ParameterDirection.Input);
+
             parameter.Add("MMessageGroupId", upd.MessageGroupId, dbType: DbType.Int32, direction: ParameterDirection.Input);
             parameter.Add("GGroupName", upd.GroupName, dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add("GGroupImg", upd.GroupImg, dbType: DbType.String, direction: ParameterDirection.Input);

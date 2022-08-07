@@ -44,7 +44,7 @@ namespace learn.infra.Repoisitory
             var parameter = new DynamicParameters();
             parameter.Add("crud ", "D", dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add("MMessageId", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            var result = dBContext.dbConnection.Execute("MessageGroupCRUD_Package.MessageCRUD", parameter, commandType: CommandType.StoredProcedure);
+            var result = dBContext.dbConnection.Execute("MessageCRUD_Package .MessageCRUD", parameter, commandType: CommandType.StoredProcedure);
             if (result == null)
             {
                 return "Notdelete";
@@ -58,8 +58,8 @@ namespace learn.infra.Repoisitory
         public List<Message> GetAllMessage()
         {
             var parameter = new DynamicParameters();
-            parameter.Add("crud", "G", dbType: DbType.Int32, direction: ParameterDirection.Input);
-            IEnumerable<Message> result = dBContext.dbConnection.Query<Message>("MessageCRUD_Package.MessageCRUD", commandType: CommandType.StoredProcedure);
+            parameter.Add("crud", "G", dbType: DbType.String, direction: ParameterDirection.Input);
+            IEnumerable<Message> result = dBContext.dbConnection.Query<Message>("MessageCRUD_Package.MessageCRUD", parameter, commandType: CommandType.StoredProcedure);
             return result.ToList();
         }
 
