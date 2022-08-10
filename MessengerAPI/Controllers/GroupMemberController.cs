@@ -17,34 +17,39 @@ namespace MessengerAPI.Controllers
         }
         [HttpGet]
         [Route("GetGroupMember")]
-        public List<GroupMember> GetGroupMember()
+        public IActionResult GetGroupMember()
         {
-            return groupMemberService.GetGroupMember();
+            var result = groupMemberService.GetGroupMember();
+            return Ok(result);
         }
         [HttpGet]
-        [Route("GetReportUsersById/{id}")]
-        public List<GroupMember> GetReportUsersById(int id)
+        [Route("GetGroupMemberById/{id}")]
+        public IActionResult GetGroupMemberById(int id)
         {
-            return groupMemberService.GetGroupMemberById(id);
+            var result = groupMemberService.GetGroupMemberById(id);
+            return Ok(result);
         }
 
         [HttpPost]
         [Route("InsertGroupMember")]
-        public bool InsertGroupMember(GroupMember groupMember)
+        public IActionResult InsertGroupMember(GroupMember groupMember)
         {
-            return groupMemberService.InsertGroupMember(groupMember);
+            var result = groupMemberService.InsertGroupMember(groupMember);
+            return Ok(result);
         }
         [HttpPut]
         [Route("UpdateGroupMember")]
-        public bool UpdateGroupMember(GroupMember groupMember)
+        public IActionResult UpdateGroupMember(GroupMember groupMember)
         {
-            return groupMemberService.UpdateGroupMember(groupMember);
+            var result = groupMemberService.UpdateGroupMember(groupMember);
+            return Ok(result);
         }
         [HttpDelete]
         [Route("DeleteGroupMember/{id}")]
-        public bool DeleteGroupMember(int id)
+        public IActionResult DeleteGroupMember(int id)
         {
-            return groupMemberService.DeleteGroupMember(id);
+            var result = groupMemberService.DeleteGroupMember(id);
+            return Ok(result);
         }
     }
 }

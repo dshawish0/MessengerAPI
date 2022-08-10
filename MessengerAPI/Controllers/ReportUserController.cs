@@ -11,41 +11,46 @@ namespace MessengerAPI.Controllers
     public class ReportUserController : Controller
     {
         private readonly IReportUserService reportUserService;
-
         public ReportUserController(IReportUserService reportUserService)
         {
             this.reportUserService = reportUserService;
         }
         [HttpGet]
         [Route("GetReportUsers")]
-        public List<ReportUser> GetReportUsers()
+        public IActionResult GetReportUsers()
         {
-            return reportUserService.GetReportUsers();
+            var result = reportUserService.GetReportUsers();
+            return Ok(result);
         }
         [HttpGet]
         [Route("GetReportUsersById/{id}")]
-        public List<ReportUser> GetReportUsersById(int id)
+        public IActionResult GetReportUsersById(int id)
         {
-            return reportUserService.GetReportUsersById(id);
+            var result = reportUserService.GetReportUsersById(id);
+            return Ok(result);
         }
 
         [HttpPost]
         [Route("InsertReportUser")]
-        public bool InsertReportUser([FromBody]ReportUser report)
+        public IActionResult InsertReportUser([FromBody]ReportUser report)
         {
-            return reportUserService.InsertReportUser(report);
+            var result = reportUserService.InsertReportUser(report);
+            return Ok(result);
         }
         [HttpPut]
         [Route("UpdateReportUser")]
-        public bool UpdateReportUser([FromBody] ReportUser report)
+        public IActionResult UpdateReportUser([FromBody] ReportUser report)
         {
-            return reportUserService.UpdateReportUser(report);
+            var result = reportUserService.UpdateReportUser(report);
+            return Ok(result);
         }
+
         [HttpDelete]
         [Route("DeleteReportUser/{id}")]
-        public bool DeleteReportUser(int id)
+        public IActionResult DeleteReportUser(int id)
         {
-            return reportUserService.DeleteReportUser(id);
+            var result = reportUserService.DeleteReportUser(id);
+            return Ok(result);
         }
     }
 }
