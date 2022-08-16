@@ -3,6 +3,7 @@ using Messenger.core.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Threading.Tasks;
 
 namespace MessengerAPI.Controllers
 {
@@ -18,11 +19,11 @@ namespace MessengerAPI.Controllers
         }
         [HttpGet]
         [Route("GetFrinds/{userId}")]
-        public IActionResult GetFrinds(int userId)
+        public async Task<IActionResult> GetFrinds(int userId)
         {
             try
             {
-                var result = frindService.GetAllFrinds(userId);
+                var result = await frindService.GetAllFrinds(userId);
                 return Ok(result);
             }
             catch (Exception e)

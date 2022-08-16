@@ -4,6 +4,7 @@ using Messenger.core.Service;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Messenger.infra.Service
 {
@@ -25,9 +26,9 @@ namespace Messenger.infra.Service
             frindRepository.DeleteFrind(userId, reciveId);
         }
 
-        public IList<Frinds> GetAllFrinds(int userId)
+        public async Task<IList<Frinds>> GetAllFrinds(int userId)
         {
-            return frindRepository.GetAllFrinds(userId);
+            return await frindRepository.GetAllFrinds(userId);
         }
 
         public Frinds GetFrindById(int userId, int reciveId)

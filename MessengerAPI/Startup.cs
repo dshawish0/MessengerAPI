@@ -62,8 +62,18 @@ namespace MessengerAPI
             
             services.AddScoped<IDtoRepository, DtoRepository>();
             services.AddScoped<IDtoService, DtoService>();
-            
-            
+
+            //add cors for connect angular
+            services.AddCors(corsOptions =>
+            {
+                corsOptions.AddPolicy("policy",
+                builder =>
+                {
+                    builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                });
+            });
+
+
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -100,6 +110,9 @@ namespace MessengerAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            //add cors for connect angular
+            app.UseCors("policy");
 
             app.UseAuthorization();
 
