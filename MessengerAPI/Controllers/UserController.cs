@@ -58,5 +58,19 @@ namespace MessengerAPI.Controllers
         {
             return userService.GetUserById(userId);
         }
+        [HttpPost]
+        [Route("GetUserByEmail")]
+        public IActionResult GetUserByEmail([FromBody] Userr user)
+        {
+            try
+            {
+                var result = userService.GetUserByUserName(user.userName);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
+        }
     }
 }

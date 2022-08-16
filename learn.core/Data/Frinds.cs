@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Messenger.core.Data;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -12,6 +13,6 @@ namespace learn.core.Data
         public DateTime Adddate { get; set; }
         public int? User_Id { get; set; }
 
-        //public virtual User User { get; set; }
+        public virtual Userr User { get; set; }
     }
 }
