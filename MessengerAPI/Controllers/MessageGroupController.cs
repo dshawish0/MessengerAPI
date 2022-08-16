@@ -17,35 +17,40 @@ namespace MessengerAPI.Controllers
         }
         [HttpGet]
         [Route("GetAllMessageGroup")]
-        public List<MessageGroup> GetAllMessageGroup()
+        public IActionResult GetAllMessageGroup()
         {
-            return MessageGroupservice.GetAllMessageGroup();
+            var result = MessageGroupservice.GetAllMessageGroup();
+            return Ok(result);
         }
         [HttpDelete]
         [Route("DeleteMessageGroup/{id}")]
-        public string DeleteMessageGroup(int id)
+        public IActionResult DeleteMessageGroup(int id)
         {
-            return MessageGroupservice.DeleteMessageGroup(id);
+            var result = MessageGroupservice.DeleteMessageGroup(id);
+            return Ok(result);
 
         }
         [HttpPost]
         [Route("CreateMessageGroup")]
-        public string MessageGroup([FromBody] MessageGroup cc)
+        public IActionResult MessageGroup([FromBody] MessageGroup cc)
         {
-            return MessageGroupservice.CreateMessageGroup(cc);  
+            var result = MessageGroupservice.CreateMessageGroup(cc);
+            return Ok(result);
         }
 
         [HttpPut]
         [Route("UpDateMessageGroup")]
-        public string UpDateMessageGroup([FromBody] MessageGroup cc)
+        public IActionResult UpDateMessageGroup([FromBody] MessageGroup cc)
         {
-            return MessageGroupservice.UpDateMessageGroup(cc);
+            var result = MessageGroupservice.UpDateMessageGroup(cc);
+            return Ok(result);
         }
         [HttpGet]
         [Route("GetMessageGroupById/{id}")]
-        public MessageGroup GetMessageGroupById(int id)
+        public IActionResult GetMessageGroupById(int id)
         {
-            return MessageGroupservice.GetMessageGroupById(id); 
+            var result = MessageGroupservice.GetMessageGroupById(id);
+            return Ok(result);
         }
     }
 }

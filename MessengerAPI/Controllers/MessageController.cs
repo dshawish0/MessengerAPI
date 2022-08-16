@@ -18,35 +18,40 @@ namespace MessengerAPI.Controllers
         }
         [HttpGet]
         [Route("GetAllMessage")]
-        public List<Message> GetAllMessage()
+        public IActionResult GetAllMessage()
         {
-            return Messageservice.GetAllMessage();
+            var result = Messageservice.GetAllMessage();
+            return Ok(result);
         }
         [HttpDelete]
         [Route("DeleteMessage/{id}")]
-        public string DeleteMessage(int id)
+        public IActionResult DeleteMessage(int id)
         {
-            return Messageservice.DeleteMessage(id);
+            var result = Messageservice.DeleteMessage(id);
+            return Ok(result);
 
         }
         [HttpPost]
         [Route("CreateMessage")]
-        public string CreateMessage([FromBody] Message ins)
+        public IActionResult CreateMessage([FromBody] Message ins)
         {
-            return Messageservice.CreateMessage(ins);
+            var result = Messageservice.CreateMessage(ins);
+            return Ok(result);
         }
 
         [HttpPut]
         [Route("UpDateMessage")]
-        public string UpDateMessage([FromBody] Message cc)
+        public IActionResult UpDateMessage([FromBody] Message cc)
         {
-            return Messageservice.UpDateMessage(cc);    
+            var result = Messageservice.UpDateMessage(cc);
+            return Ok(result);
         }
         [HttpGet]
         [Route("GetMessageById/{id}")]
-        public Message GetMessageById(int id)
+        public IActionResult GetMessageById(int id)
         {
-            return Messageservice.GetMessageById(id);
+            var result = Messageservice.GetMessageById(id);
+            return Ok(result);
         }
     }
 }
