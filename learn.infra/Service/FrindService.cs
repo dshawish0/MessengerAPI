@@ -21,9 +21,19 @@ namespace Messenger.infra.Service
             frindRepository.AddFrind(frind);
         }
 
-        public void DeleteFrind(int userId, int reciveId)
+        public void BlockFriend(int id)
         {
-            frindRepository.DeleteFrind(userId, reciveId);
+            frindRepository.BlockFriend(id);
+        }
+
+        public void confirmFriend(int id)
+        {
+            frindRepository.confirmFriend(id);
+        }
+
+        public void DeleteFrind(int friendId)
+        {
+            frindRepository.DeleteFrind(friendId);
         }
 
         public async Task<IList<Frinds>> GetAllFrinds(int userId)
