@@ -30,9 +30,9 @@ namespace learn.infra.Service
             return MessageGroupRepoisitory.GetAllMessageGroup();
         }
 
-        public async Task<IList<MessageGroup>> GetFullMessageGroup(int id)
+        public async Task<IList<MessageGroup>> GetMessageGroupForUser(int id)
         {
-            return await MessageGroupRepoisitory.GetFullMessageGroup(id);
+            return await MessageGroupRepoisitory.GetMessageGroupForUser(id);
         }
 
         public MessageGroup GetMessageGroupById(int id)

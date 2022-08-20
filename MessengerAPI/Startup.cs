@@ -73,7 +73,9 @@ namespace MessengerAPI
                 });
             });
 
-
+            services.AddControllers().AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
 
             services.AddAuthentication(x =>
             {

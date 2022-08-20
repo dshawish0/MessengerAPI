@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace learn.infra.Repoisitory
 {
@@ -61,6 +62,29 @@ namespace learn.infra.Repoisitory
             parameter.Add("crud", "G", dbType: DbType.String, direction: ParameterDirection.Input);
             IEnumerable<Message> result = dBContext.dbConnection.Query<Message>("MessageCRUD_Package.MessageCRUD", parameter, commandType: CommandType.StoredProcedure);
             return result.ToList();
+        }
+
+        public async Task<IList<Message>> GetAllMessageForMessageGroup(int messageGroup_id)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add("@MessageGroup_ID", messageGroup_id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            var result = await dBContext.dbConnection.QueryAsync<Message, MessageGroup, Message >("Chat_Package.GetMessageForMessageGroup", (message, messageGroup) =>
+            {
+                message.MessageGroup = message.MessageGroup ?? new MessageGroup();
+                message.MessageGroup = messageGroup;
+
+
+
+                return message;
+            },
+
+            splitOn: "MessageGroupId",
+            param: parameter,
+            commandType: CommandType.StoredProcedure
+            );
+            return result.ToList();
+            
         }
 
         public Message GetMessageById(int id)

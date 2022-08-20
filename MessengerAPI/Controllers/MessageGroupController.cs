@@ -61,7 +61,7 @@ namespace MessengerAPI.Controllers
         {
             try
             {
-                var result = MessageGroupservice.GetFullMessageGroup(id);
+                var result = MessageGroupservice.GetMessageGroupForUser(id);
                 return Ok(result);
             }
             catch (Exception e)
@@ -70,6 +70,7 @@ namespace MessengerAPI.Controllers
             }
             
         }
+
         [HttpPost]
         [Route("uploadImage")]
         public MessageGroup uploadImage()

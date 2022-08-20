@@ -14,6 +14,6 @@ namespace learn.core.Service
         public string UpDateMessageGroup(MessageGroup upd);
         public string DeleteMessageGroup(int id);
 
-        public Task<IList<MessageGroup>> GetFullMessageGroup(int id);
+        public Task<IList<MessageGroup>> GetMessageGroupForUser(int id);
     }
 }

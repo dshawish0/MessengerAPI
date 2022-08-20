@@ -3,11 +3,13 @@ using learn.core.Data;
 using learn.core.domain;
 using learn.core.Repoisitory;
 using learn.infra.Service;
+using Messenger.core.Data;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace learn.infra.Repoisitory
 {
@@ -45,6 +47,24 @@ namespace learn.infra.Repoisitory
             var parameter = new DynamicParameters();
             parameter.Add("GGroupMemberId", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
             IEnumerable<GroupMember> result = dBContext.dbConnection.Query<GroupMember>("GroupMemberCRUD_Package.getById", parameter, commandType: CommandType.StoredProcedure);
+            return result.ToList();
+        }
+
+        public async Task<IList<GroupMember>> GetGroupMemberForMessageGroup(int MessageGroup_id)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add("@MessageGroup_ID", MessageGroup_id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            var result = await dBContext.dbConnection.QueryAsync<GroupMember, Userr, GroupMember>("Chat_Package.GetGroupMemberForMessageGroup", (groupMember, user) =>
+            {
+                groupMember.User = groupMember.User ?? new Userr();
+                groupMember.User = user;
+                return groupMember;
+            },
+            splitOn: "userId",
+            param: parameter,
+            commandType: CommandType.StoredProcedure
+            );
             return result.ToList();
         }
 
