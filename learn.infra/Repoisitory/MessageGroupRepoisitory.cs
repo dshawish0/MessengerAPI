@@ -2,11 +2,13 @@
 using learn.core.Data;
 using learn.core.domain;
 using learn.core.Repoisitory;
+using Messenger.core.Data;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace learn.infra.Repoisitory
 {
@@ -61,6 +63,76 @@ namespace learn.infra.Repoisitory
 
             IEnumerable<MessageGroup> result = dBContext.dbConnection.Query<MessageGroup>("MessageGroupCRUD_Package.MessageGroupCRUD", parameter, commandType: CommandType.StoredProcedure);
             return result.ToList();
+        }
+
+        public async Task<IList<MessageGroup>> GetFullMessageGroup(int id)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add("@id", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            var result = await dBContext.dbConnection.QueryAsync<MessageGroup, Message, GroupMember, Userr, MessageGroup>("Chat_Package.Chat", (messageGroup, message, groupMember,  user) =>
+            {
+                messageGroup.Messages = messageGroup.Messages ?? new List<Message>();
+                messageGroup.Messages.Add(message);
+                messageGroup.GroupMembers = messageGroup.GroupMembers ?? new List<GroupMember>();
+                messageGroup.GroupMembers.Add(groupMember);
+                
+
+                messageGroup.GroupMembers.First().User = messageGroup.GroupMembers.First().User ?? new Userr();
+                messageGroup.GroupMembers.First().User = user;
+
+
+                return messageGroup;
+            },
+            splitOn: "MessageGroupId,MessageId,GroupMemberId,userId",
+            param: parameter,
+            commandType: CommandType.StoredProcedure
+            );
+
+            var value = result.AsList<MessageGroup>().OrderBy(x => x.MessageGroupId).Distinct()
+                .GroupBy(x => x.MessageGroupId)
+                .Select(o =>
+                {
+                    MessageGroup messageGroup = o.First();
+                    messageGroup.Messages = o.Distinct().Select(m => m.Messages.Single()).Select(message => new Message
+                    {
+                        MessageId = message.MessageId,
+                        Text = message.Text,
+                        MessageDate = message.MessageDate,
+                        SenderId = message.SenderId,
+                        MessageGroupId = message.MessageGroupId
+                    }).Distinct().ToList();
+                    messageGroup.GroupMembers = o.Distinct().Select(t => t.GroupMembers.Single()).Select(groupMember => new GroupMember
+                    {
+                        MessageGroupId = groupMember.MessageGroupId,
+                        GroupMemberId = groupMember.GroupMemberId,
+                        JoinDate = groupMember.JoinDate,
+                        LeftDate = groupMember.LeftDate,
+                        User_Id = groupMember.User_Id,
+                        User = groupMember.User
+                    }).Distinct().ToList();
+                    //messageGroup.GroupMembers.First().User = o.Select(t => t.GroupMembers.Single()).Select(user => new Userr
+                    //{
+                    //  UserId = user.User.UserId,
+                    //  Fname = user.User.Fname,
+                    //  Lname = user.User.Lname,
+                    //  userName = user.User.userName,
+                    //  ProFileImg = user.User.ProFileImg,
+                    //  IsActive = user.User.IsActive,
+                    //  IsBlocked = user.User.IsBlocked,
+                    //  Gender = user.User.Gender,
+                    //  UserBio = user.User.UserBio
+                    //}).First();
+
+                    return messageGroup;
+                }).ToList();
+
+            return value.ToList();
+
+
+
+
+
         }
 
         public MessageGroup GetMessageGroupById(int id)

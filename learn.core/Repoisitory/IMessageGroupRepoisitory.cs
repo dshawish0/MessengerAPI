@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace learn.core.Repoisitory
 {
@@ -13,6 +14,8 @@ namespace learn.core.Repoisitory
         public string CreateMessageGroup(MessageGroup ins);
         public string UpDateMessageGroup(MessageGroup upd);
         public string DeleteMessageGroup(int id);
+
+        public Task<IList<MessageGroup>> GetFullMessageGroup(int id);
 
     }
 }

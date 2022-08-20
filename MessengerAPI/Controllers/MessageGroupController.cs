@@ -2,7 +2,9 @@
 using learn.core.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace MessengerAPI.Controllers
 {
@@ -51,6 +53,45 @@ namespace MessengerAPI.Controllers
         {
             var result = MessageGroupservice.GetMessageGroupById(id);
             return Ok(result);
+        }
+
+        [HttpGet]
+        [Route("GetFullMessageGroup/{id}")]
+        public IActionResult GetFullMessageGroup(int id)
+        {
+            try
+            {
+                var result = MessageGroupservice.GetFullMessageGroup(id);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
+            
+        }
+        [HttpPost]
+        [Route("uploadImage")]
+        public MessageGroup uploadImage()
+        {
+            try
+            {
+                var file = Request.Form.Files[0];
+                var fileName = Guid.NewGuid().ToString()+"_"+ file.FileName;
+                var fullPath = Path.Combine("C:\\Users\\yazan\\OneDrive\\سطح المكتب\\New folder (2)\\MessengerAppUI\\src\\assets\\images", fileName);
+
+                using (var stream = new FileStream(fullPath, FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                }
+                MessageGroup item = new MessageGroup();
+                item.GroupImg = fileName;
+                return item;
+            }
+            catch (Exception e)
+            {
+                return new MessageGroup();
+            }
         }
     }
 }

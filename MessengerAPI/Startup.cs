@@ -74,6 +74,7 @@ namespace MessengerAPI
             });
 
 
+
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -113,6 +114,8 @@ namespace MessengerAPI
 
             //add cors for connect angular
             app.UseCors("policy");
+
+            
 
             app.UseAuthorization();
 
