@@ -1,8 +1,12 @@
-﻿using Messenger.core.Data;
+﻿using MailKit.Net.Smtp;
+using Messenger.core;
+using Messenger.core.Data;
 using Messenger.core.DTO;
 using Messenger.core.Repoisitory;
 using Messenger.core.Service;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using MimeKit;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -14,10 +18,12 @@ namespace Messenger.infra.Service
     public class LoginService : ILoginService
     {
         private readonly ILoginRepository loginRepository;
+        private readonly IUserRepository UserRepository;
 
-        public LoginService(ILoginRepository loginRepository)
+        public LoginService(ILoginRepository loginRepository, IUserRepository UserRepository)
         {
             this.loginRepository = loginRepository;
+            this.UserRepository = UserRepository;
         }
 
         public string Authentication_jwt(Login login)
@@ -56,12 +62,62 @@ namespace Messenger.infra.Service
 
         public bool InsertLog(UserLogDTO userLog)
         {
+            Userr user = UserRepository.GetUserByUserName(userLog.userName);
+            userLog.UserId = user.UserId;
+            Global.userLog = userLog;
             return loginRepository.InsertLog(userLog);
         }
 
         public bool UpdateLog(Login userLog)
         {
             return loginRepository.UpdateLog(userLog);
+        }
+
+
+        public bool restPassword(Login login)
+        {
+            
+            return UpdateLog(login);
+
+
+        }
+
+        public Login getLogByEmail(string email)
+        {
+            var log = loginRepository.getLogByEmail(email);
+
+            if (log == null)
+                return null;
+            sendEmailCode(log);
+            return log;
+        }
+
+        void sendEmailCode(Login log)
+        {
+            MimeMessage obj = new MimeMessage();
+            MailboxAddress emailfrom = new MailboxAddress("user", "teeeeeestemail@gmail.com");
+            MailboxAddress emailto = new MailboxAddress(log.userName, log.Email);
+
+            obj.From.Add(emailfrom);
+            obj.To.Add(emailto);
+            obj.Subject = "Rest Password";
+            BodyBuilder bb = new BodyBuilder();
+            //onclick="window.location.href='https://w3docs.com';">
+            //bb.HtmlBody = "<html>" + "<button window.location.href="+"'"+"https://localhost:44353/api/Authen/verificationCode/" + api_LoginAuth.verificationCode+"';"+">"+ 
+            //    "verificationCode" + "</button>" + "</html>";
+            bb.HtmlBody = "<html>" + "<h1>" + "http://localhost:4200/log/restPassword/"+log.LoginId + "</h1>" + "</html>";
+
+            //< a href = 'http://www.example.com' ></ a > "
+           // bb.HtmlBody = "<html>" + "<a href = " + "https://localhost:44318/api/user/ConfirmEmail/" + userLog.verificationCode + ">" + "</a>" + "</html>";
+            obj.Body = bb.ToMessageBody();
+
+            SmtpClient emailClinet = new SmtpClient();
+            emailClinet.Connect("smtp.gmail.com", 465, true);
+            emailClinet.Authenticate("teeeeeestemail@gmail.com", "zvvugvfrinavklfj");
+            emailClinet.Send(obj);
+
+            emailClinet.Disconnect(true);
+            emailClinet.Dispose();
         }
     }
 }

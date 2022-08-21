@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,23 +16,16 @@ namespace MessengerAPI.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService userService;
-        private readonly ILoginService loginService;
 
-        public UserController(IUserService userService, ILoginService loginService)
+        public UserController(IUserService userService)
         {
             this.userService = userService;
-            this.loginService = loginService;
         }
 
         [HttpPost]
         public IActionResult InsertUser([FromBody] UserLogDTO userlog)
         {
             var result = userService.InsertUser(userlog);
-
-            userlog.UserId = userService.GetUserByUserName(userlog.userName).UserId;
-            loginService.InsertLog(userlog);
-
-
 
             return Ok(result);
         }
@@ -74,6 +68,37 @@ namespace MessengerAPI.Controllers
                 return NotFound(e.Message);
             }
         }
+        
+        [HttpGet]
+        [Route("ConfirmEmail/{code}")]
+        public IActionResult confirmEmail(string code)
+        {
+            return Ok(userService.confirmEmail(code));
+        }
+
+        [HttpPost]
+        [Route("upLoadImg")]
+        public Userr UploadImage()
+        {
+            try
+            {
+                var file = Request.Form.Files[0];
+                var fileName = Guid.NewGuid().ToString() + "_" + file.FileName;
+                var fullPath = Path.Combine("D:\\MessengerAppUI\\MessengerAppUI\\src\\assets\\Img", fileName);
+
+                using(var stream = new FileStream(fullPath, FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                }
+
+                Userr item = new Userr();
+                item.ProFileImg = fileName;
+                return item;
+            }
+            catch(Exception e)
+            {
+                return null;
+
 
         [HttpPost]
         [Route("IsBlocked/{userId}")]
@@ -89,6 +114,7 @@ namespace MessengerAPI.Controllers
                 return NotFound(e.Message);
             }
         }
+        
         [HttpPost]
         [Route("UnBlocked/{userId}")]
         public IActionResult UnBlock(int userId)
@@ -101,6 +127,7 @@ namespace MessengerAPI.Controllers
             catch (Exception e)
             {
                 return NotFound(e.Message);
+
             }
         }
     }

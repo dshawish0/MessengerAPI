@@ -85,7 +85,6 @@ namespace Messenger.infra.Repoisitory
             parameter.Add
               ("@UuserName", userLog.userName, dbType: DbType.String, direction: ParameterDirection.Input);
 
-
             var result = dBContext.dbConnection.ExecuteAsync
                 ("UserrCRUD_Package.UserrCRUD", parameter, commandType: CommandType.StoredProcedure);
 
