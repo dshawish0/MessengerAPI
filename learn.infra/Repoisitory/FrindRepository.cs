@@ -33,12 +33,27 @@ namespace Messenger.infra.Repoisitory
             dbContext.dbConnection.ExecuteAsync("FrindsCrud_Package.FrindsCrud", p, commandType: CommandType.StoredProcedure);
         }
 
-        public void DeleteFrind(int userId, int reciveId)
+        public void BlockFriend(int id)
+        {
+            var p = new DynamicParameters();
+            p.Add("@id", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            dbContext.dbConnection.ExecuteAsync("FrindsCrud_Package.BlockFriend", p, commandType: CommandType.StoredProcedure);
+        }
+
+        public void confirmFriend(int id)
+        {
+            var p = new DynamicParameters();
+            p.Add("@id", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            dbContext.dbConnection.ExecuteAsync("FrindsCrud_Package.confirmFriend", p, commandType: CommandType.StoredProcedure);
+        }
+
+        public void DeleteFrind(int friendId)
         {
             var p = new DynamicParameters();
             p.Add("@crud", "D", dbType: DbType.String, direction: ParameterDirection.Input);
-            p.Add("@ReceiveId", reciveId, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            p.Add("@uId", userId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("@Frind_Id", friendId, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
             dbContext.dbConnection.ExecuteAsync("FrindsCrud_Package.FrindsCrud", p, commandType: CommandType.StoredProcedure);
         }

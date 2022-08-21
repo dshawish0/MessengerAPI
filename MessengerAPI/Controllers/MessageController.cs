@@ -3,7 +3,9 @@ using learn.core.Service;
 using learn.infra.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MessengerAPI.Controllers
 {
@@ -52,6 +54,21 @@ namespace MessengerAPI.Controllers
         {
             var result = Messageservice.GetMessageById(id);
             return Ok(result);
+        }
+
+        [HttpGet]
+        [Route("GetMessageForMessageGroup/{messageGroup_Id}")]
+        public async Task<IActionResult> GetMessageForMessageGroup(int messageGroup_Id)
+        {
+            try
+            {
+                var result = await Messageservice.GetAllMessageForMessageGroup(messageGroup_Id);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
         }
     }
 }

@@ -51,6 +51,7 @@ namespace MessengerAPI.Controllers
         {
             try
             {
+                frind.Adddate = DateTime.Now;
                 frindService.AddFrind(frind);
                 return Ok();
             }
@@ -74,12 +75,40 @@ namespace MessengerAPI.Controllers
             }
         }
         [HttpDelete]
-        [Route("DeleteFrind")]
-        public IActionResult DeleteFrind([FromBody] Frinds frind)
+        [Route("DeleteFrind/{id}")]
+        public IActionResult DeleteFrind(int id)
         {
             try
             {
-                frindService.DeleteFrind((int)frind.User_Id, frind.Userreceiveid);
+                frindService.DeleteFrind(id);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
+        }
+        [HttpPut]
+        [Route("confirmFriend/{id}")]
+        public IActionResult confirmFriend(int id)
+        {
+            try
+            {
+                frindService.confirmFriend(id);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
+        }
+        [HttpPut]
+        [Route("BlockFriend/{id}")]
+        public IActionResult BlockFriend(int id)
+        {
+            try
+            {
+                frindService.BlockFriend(id);
                 return Ok();
             }
             catch (Exception e)

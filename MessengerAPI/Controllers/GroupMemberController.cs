@@ -2,7 +2,9 @@
 using learn.core.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MessengerAPI.Controllers
 {
@@ -50,6 +52,21 @@ namespace MessengerAPI.Controllers
         {
             var result = groupMemberService.DeleteGroupMember(id);
             return Ok(result);
+        }
+
+        [HttpGet]
+        [Route("GetGroupMemberForMessageGroup/{messageGroup_id}")]
+        public async Task<IActionResult> GetGroupMemberForMessageGroup(int messageGroup_id)
+        {
+            try
+            {
+                var result = await groupMemberService.GetGroupMemberForMessageGroup(messageGroup_id);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
         }
     }
 }

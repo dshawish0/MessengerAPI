@@ -4,6 +4,7 @@ using learn.core.Service;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace learn.infra.Service
 {
@@ -28,6 +29,11 @@ namespace learn.infra.Service
         public List<GroupMember> GetGroupMemberById(int id)
         {
             return groupMemberRepoisitory.GetGroupMemberById(id);
+        }
+
+        public async Task<IList<GroupMember>> GetGroupMemberForMessageGroup(int MessageGroup_id)
+        {
+            return await groupMemberRepoisitory.GetGroupMemberForMessageGroup(MessageGroup_id);
         }
 
         public bool InsertGroupMember(GroupMember groupMember)
