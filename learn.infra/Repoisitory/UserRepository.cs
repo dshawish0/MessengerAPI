@@ -39,7 +39,7 @@ namespace Messenger.infra.Repoisitory
         {
             var parameter = new DynamicParameters();
             parameter.Add
-                ("@crud", "G", dbType: DbType.Int32, direction: ParameterDirection.Input);
+                ("@crud", "G", dbType: DbType.String, direction: ParameterDirection.Input);
             IEnumerable<Userr> result = dBContext.dbConnection.Query<Userr>
                 ("UserrCRUD_Package.UserrCRUD", parameter, commandType: CommandType.StoredProcedure);
             return result.ToList();
@@ -84,7 +84,6 @@ namespace Messenger.infra.Repoisitory
                ("@IIsActive", 0, dbType: DbType.Int32, direction: ParameterDirection.Input);
             parameter.Add
               ("@UuserName", userLog.userName, dbType: DbType.String, direction: ParameterDirection.Input);
-
 
             var result = dBContext.dbConnection.ExecuteAsync
                 ("UserrCRUD_Package.UserrCRUD", parameter, commandType: CommandType.StoredProcedure);

@@ -46,6 +46,26 @@ namespace Messenger.infra.Repoisitory
             return result.ToList();
         }
 
+        public Login getById(int UserId)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add("@UUser_Id", UserId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            IEnumerable<Login> result = dBContext.dbConnection.Query<Login>
+                ("LoginCRUD_Package.getById", parameter, commandType: CommandType.StoredProcedure);
+            return result.FirstOrDefault();
+        }
+
+        public Login getLogByEmail(string email)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add("@EEmail", email, dbType: DbType.String, direction: ParameterDirection.Input);
+
+            IEnumerable<Login> result = dBContext.dbConnection.Query<Login>
+                ("LoginCRUD_Package.getByEmail", parameter, commandType: CommandType.StoredProcedure);
+            return result.FirstOrDefault();
+        }
+
         public bool InsertLog(UserLogDTO userLog)
         {
             var parameter = new DynamicParameters();
@@ -61,6 +81,8 @@ namespace Messenger.infra.Repoisitory
                ("@RRoleId", 2, dbType: DbType.Int32, direction: ParameterDirection.Input);
             parameter.Add
                ("@UuserName", userLog.userName, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add
+               ("@VverificationCode", userLog.verificationCode, dbType: DbType.String, direction: ParameterDirection.Input);
 
             var result = dBContext.dbConnection.ExecuteAsync
                 ("LoginCRUD_Package.LoginCRUD", parameter, commandType: CommandType.StoredProcedure);
@@ -76,11 +98,17 @@ namespace Messenger.infra.Repoisitory
             parameter.Add
                ("@crud", "U", dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add
-               ("@LoginId", userLog.LoginId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+               ("@UUser_Id", userLog.User_Id, dbType: DbType.Int32, direction: ParameterDirection.Input);
             parameter.Add
                ("@EEmail", userLog.Email, dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add
                ("@PPassword", userLog.Password, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add
+              ("@VverificationCode", userLog.verificationCode, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add
+               ("@RRoleId", 2, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add
+               ("@UuserName", userLog.userName, dbType: DbType.String, direction: ParameterDirection.Input);
 
             var result = dBContext.dbConnection.ExecuteAsync
                 ("LoginCRUD_Package.LoginCRUD", parameter, commandType: CommandType.StoredProcedure);

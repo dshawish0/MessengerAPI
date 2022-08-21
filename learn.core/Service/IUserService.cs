@@ -14,6 +14,6 @@ namespace Messenger.core.Service
         public bool UpdateUser(Userr user);
         public Userr GetUserById(int userId);
         public Userr GetUserByUserName(string userName);
-
+        public string confirmEmail(string code);
     }
 }
