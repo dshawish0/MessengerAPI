@@ -29,16 +29,16 @@ namespace MessengerAPI.Controllers
             var result = reportUserService.GetReportUsersById(id);
             return Ok(result);
         }
-
         [HttpPost]
-        [Route("InsertReportUser")]
-        public IActionResult InsertReportUser([FromBody]ReportUser report)
+        [Route("Create")]
+        public IActionResult InsertReportUser([FromBody] ReportUser report)
         {
+
             var result = reportUserService.InsertReportUser(report);
             return Ok(result);
         }
         [HttpPut]
-        [Route("UpdateReportUser")]
+        [Route("Update")]
         public IActionResult UpdateReportUser([FromBody] ReportUser report)
         {
             var result = reportUserService.UpdateReportUser(report);

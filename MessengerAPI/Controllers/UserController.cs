@@ -49,10 +49,12 @@ namespace MessengerAPI.Controllers
         }
 
         [HttpPut]
+        [Route("UpdateUser")]
         public bool UpdateUser([FromBody] Userr user)
         {
             return userService.UpdateUser(user);
         }
+        
         [HttpGet("{id}")]
         public Userr course(int userId)
         {
@@ -65,6 +67,35 @@ namespace MessengerAPI.Controllers
             try
             {
                 var result = userService.GetUserByUserName(user.userName);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("IsBlocked/{userId}")]
+        public IActionResult IsBlocked(int userId)
+        {
+            try
+            {
+                var result = userService.IsBlocked(userId);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
+        }
+        [HttpPost]
+        [Route("UnBlocked/{userId}")]
+        public IActionResult UnBlock(int userId)
+        {
+            try
+            {
+                var result = userService.UnBlock(userId);
                 return Ok(result);
             }
             catch (Exception e)
