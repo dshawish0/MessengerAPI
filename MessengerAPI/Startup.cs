@@ -73,6 +73,9 @@ namespace MessengerAPI
                 });
             });
 
+            services.AddControllers().AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
 
             services.AddAuthentication(x =>
             {
@@ -113,6 +116,8 @@ namespace MessengerAPI
 
             //add cors for connect angular
             app.UseCors("policy");
+
+            
 
             app.UseAuthorization();
 

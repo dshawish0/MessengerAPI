@@ -121,5 +121,25 @@ namespace Messenger.infra.Repoisitory
                 return false;
             return true;
         }
+
+
+        public bool IsBlocked(int userId)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add("@UUserId", userId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            var result = dBContext.dbConnection.ExecuteAsync("UserrCRUD_Package.IsBlocked", parameter, commandType: CommandType.StoredProcedure);
+            if (result == null)
+                return false;
+            return true;
+        }
+        public bool UnBlock(int userId)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add("@UUserId", userId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            var result = dBContext.dbConnection.ExecuteAsync("UserrCRUD_Package.UnBlock", parameter, commandType: CommandType.StoredProcedure);
+            if (result == null)
+                return false;
+            return true;
+        }
     }
 }

@@ -61,8 +61,6 @@ namespace Messenger.infra.Service
 
 
 
-
-
         public void addUserLogData(UserLogDTO userLog)
         {
             Random r = new Random();
@@ -149,5 +147,15 @@ namespace Messenger.infra.Service
             return "false";
         }
 
+        public bool IsBlocked(int userId)
+        {
+            return UserRepository.IsBlocked(userId);
+
+        }
+        public bool UnBlock(int userId)
+        {
+            return UserRepository.UnBlock(userId);
+
+        }
     }
 }
