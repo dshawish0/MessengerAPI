@@ -46,5 +46,15 @@ namespace Messenger.infra.Service
         {
             return UserRepository.UpdateUser(user);
         }
+        public bool IsBlocked(int userId)
+        {
+            return UserRepository.IsBlocked(userId);
+
+        }
+        public bool UnBlock(int userId)
+        {
+            return UserRepository.UnBlock(userId);
+
+        }
     }
 }
