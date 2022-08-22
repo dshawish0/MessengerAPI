@@ -2,11 +2,13 @@
 using learn.core.Data;
 using learn.core.domain;
 using learn.core.Repoisitory;
+using Messenger.core.Data;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace learn.infra.Repoisitory
 {
@@ -63,6 +65,43 @@ namespace learn.infra.Repoisitory
             return result.ToList();
         }
 
+        public async Task<IList<MessageGroup>> GetMessageGroupForUser(int id)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add("@id", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            var result = await dBContext.dbConnection.QueryAsync<MessageGroup, GroupMember, MessageGroup>("Chat_Package.Chat", (messageGroup, groupMember) =>
+            {
+                messageGroup.GroupMembers = messageGroup.GroupMembers ?? new List<GroupMember>();
+                messageGroup.GroupMembers.Add(groupMember);
+                return messageGroup;
+            },
+            splitOn: "MessageGroupId,GroupMemberId",
+            param: parameter,
+            commandType: CommandType.StoredProcedure
+            );
+
+            var value = result.AsList<MessageGroup>().OrderBy(x => x.MessageGroupId)
+                .GroupBy(x => x.MessageGroupId)
+                .Select(o =>
+                {
+                    MessageGroup messageGroup = o.First();
+                    messageGroup.GroupMembers = o.Select(t => t.GroupMembers.Single()).Select(groupMember => new GroupMember
+                    {
+                        MessageGroupId = groupMember.MessageGroupId,
+                        GroupMemberId = groupMember.GroupMemberId,
+                        JoinDate = groupMember.JoinDate,
+                        LeftDate = groupMember.LeftDate,
+                        User_Id = groupMember.User_Id,
+                        User = groupMember.User
+                    }).ToList();
+                    
+                    return messageGroup;
+                }).ToList();
+
+            return value.ToList();
+        }
+
         public MessageGroup GetMessageGroupById(int id)
         {
             var parameter = new DynamicParameters();
@@ -94,5 +133,7 @@ namespace learn.infra.Repoisitory
                 return "UpDate";
             }
         }
+
+        
     }
 }

@@ -4,6 +4,7 @@ using learn.core.Service;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace learn.infra.Service
 {
@@ -27,6 +28,11 @@ namespace learn.infra.Service
         public List<Message> GetAllMessage()
         {
             return MessageRepoisitory.GetAllMessage();
+        }
+
+        public async Task<IList<Message>> GetAllMessageForMessageGroup(int messageGroup_id)
+        {
+            return await MessageRepoisitory.GetAllMessageForMessageGroup(messageGroup_id);
         }
 
         public Message GetMessageById(int id)
