@@ -124,19 +124,19 @@ namespace Messenger.infra.Repoisitory
         }
 
 
-        public bool IsBlocked(int userId)
+        public bool IsBlocked(Userr user)
         {
             var parameter = new DynamicParameters();
-            parameter.Add("@UUserId", userId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@UUserId", user.UserId, dbType: DbType.Int32, direction: ParameterDirection.Input);
             var result = dBContext.dbConnection.ExecuteAsync("UserrCRUD_Package.IsBlocked", parameter, commandType: CommandType.StoredProcedure);
             if (result == null)
                 return false;
             return true;
         }
-        public bool UnBlock(int userId)
+        public bool UnBlock(Userr user)
         {
             var parameter = new DynamicParameters();
-            parameter.Add("@UUserId", userId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@UUserId", user.UserId, dbType: DbType.Int32, direction: ParameterDirection.Input);
             var result = dBContext.dbConnection.ExecuteAsync("UserrCRUD_Package.UnBlock", parameter, commandType: CommandType.StoredProcedure);
             if (result == null)
                 return false;

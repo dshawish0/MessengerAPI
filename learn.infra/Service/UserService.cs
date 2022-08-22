@@ -46,14 +46,14 @@ namespace Messenger.infra.Service
         {
             return UserRepository.UpdateUser(user);
         }
-        public bool IsBlocked(int userId)
+        public bool IsBlocked(Userr user)
         {
-            return UserRepository.IsBlocked(userId);
+            return UserRepository.IsBlocked(user);
 
         }
-        public bool UnBlock(int userId)
+        public bool UnBlock(Userr user)
         {
-            return UserRepository.UnBlock(userId);
+            return UserRepository.UnBlock(user);
 
         }
     }
