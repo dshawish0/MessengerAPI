@@ -19,7 +19,7 @@ namespace Messenger.infra.Service
     {
         private readonly IUserRepository UserRepository;
         private readonly ILoginService LoginService;
-        private bool falg = true;
+        private static bool falg = true;
 
         public UserService(IUserRepository UserRepository, ILoginService LoginService)
         {
