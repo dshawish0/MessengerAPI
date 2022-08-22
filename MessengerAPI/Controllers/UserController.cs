@@ -101,12 +101,12 @@ namespace MessengerAPI.Controllers
 
 
         [HttpPost]
-        [Route("IsBlocked/{userId}")]
-        public IActionResult IsBlocked(int userId)
+        [Route("IsBlocked")]
+        public IActionResult IsBlocked([FromBody] Userr user)
         {
             try
             {
-                var result = userService.IsBlocked(userId);
+                var result = userService.IsBlocked(user);
                 return Ok(result);
             }
             catch (Exception e)
@@ -116,12 +116,12 @@ namespace MessengerAPI.Controllers
         }
         
         [HttpPost]
-        [Route("UnBlocked/{userId}")]
-        public IActionResult UnBlock(int userId)
+        [Route("UnBlocked")]
+        public IActionResult UnBlock(Userr user)
         {
             try
             {
-                var result = userService.UnBlock(userId);
+                var result = userService.UnBlock(user);
                 return Ok(result);
             }
             catch (Exception e)

@@ -59,8 +59,6 @@ namespace Messenger.infra.Service
             return UserRepository.UpdateUser(user);
         }
 
-
-
         public void addUserLogData(UserLogDTO userLog)
         {
             Random r = new Random();
@@ -125,7 +123,6 @@ namespace Messenger.infra.Service
             }
 
         }
-
         public string confirmEmail(string code)
         {
             if (code.Equals(Global.userLog.verificationCode))
@@ -149,12 +146,12 @@ namespace Messenger.infra.Service
 
         public bool IsBlocked(int userId)
         {
-            return UserRepository.IsBlocked(userId);
+            return UserRepository.IsBlocked(user);
 
         }
-        public bool UnBlock(int userId)
+        public bool UnBlock(Userr user)
         {
-            return UserRepository.UnBlock(userId);
+            return UserRepository.UnBlock(user);
 
         }
     }

@@ -14,9 +14,9 @@ namespace Messenger.core.Service
         public bool UpdateUser(Userr user);
         public Userr GetUserById(int userId);
         public Userr GetUserByUserName(string userName);
+        public bool IsBlocked(Userr user);
+        public bool UnBlock(Userr user);
         public string confirmEmail(string code);
-        public bool IsBlocked(int userId);
-        public bool UnBlock(int userId);
 
     }
 }
