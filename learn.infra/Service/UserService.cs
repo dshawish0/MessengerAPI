@@ -91,10 +91,10 @@ namespace Messenger.infra.Service
             //onclick="window.location.href='https://w3docs.com';">
             //bb.HtmlBody = "<html>" + "<button window.location.href="+"'"+"https://localhost:44353/api/Authen/verificationCode/" + api_LoginAuth.verificationCode+"';"+">"+ 
             //    "verificationCode" + "</button>" + "</html>";
-            //bb.HtmlBody = "<html>" + "<h1>" + userLog.verificationCode + "</h1>" + "</html>";
+            bb.HtmlBody = "<html>" + "<h1>" + userLog.verificationCode + "</h1>" + "</html>";
 
             //< a href = 'http://www.example.com' ></ a > "
-            bb.HtmlBody = "<html>" + "<a href = " + "https://localhost:44318/api/user/ConfirmEmail/" + userLog.verificationCode + ">" + "</a>" + "</html>";
+            ///bb.HtmlBody = "<html>" + "<a href = " + "https://localhost:44318/api/user/ConfirmEmail/" + userLog.verificationCode + ">" + "</a>" + "</html>";
             obj.Body = bb.ToMessageBody();
 
             SmtpClient emailClinet = new SmtpClient();
@@ -144,7 +144,7 @@ namespace Messenger.infra.Service
             return "false";
         }
 
-        public bool IsBlocked(int userId)
+        public bool IsBlocked(Userr user)
         {
             return UserRepository.IsBlocked(user);
 
