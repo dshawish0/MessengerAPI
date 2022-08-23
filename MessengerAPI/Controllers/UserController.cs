@@ -48,7 +48,7 @@ namespace MessengerAPI.Controllers
         {
             return userService.UpdateUser(user);
         }
-        
+
         [HttpGet("{id}")]
         public Userr course(int userId)
         {
@@ -68,7 +68,7 @@ namespace MessengerAPI.Controllers
                 return NotFound(e.Message);
             }
         }
-        
+
         [HttpGet]
         [Route("ConfirmEmail/{code}")]
         public IActionResult confirmEmail(string code)
@@ -84,9 +84,9 @@ namespace MessengerAPI.Controllers
             {
                 var file = Request.Form.Files[0];
                 var fileName = Guid.NewGuid().ToString() + "_" + file.FileName;
-                var fullPath = Path.Combine("D:\\MessengerAppUI\\MessengerAppUI\\src\\assets\\Img", fileName);
+                var fullPath = Path.Combine("D:\\MessengerAppUI\\src\\assets\\Img", fileName);
 
-                using(var stream = new FileStream(fullPath, FileMode.Create))
+                using (var stream = new FileStream(fullPath, FileMode.Create))
                 {
                     file.CopyTo(stream);
                 }
@@ -95,10 +95,13 @@ namespace MessengerAPI.Controllers
                 item.ProFileImg = fileName;
                 return item;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return null;
 
+            }
+
+        }
 
         [HttpPost]
         [Route("IsBlocked")]
@@ -114,7 +117,7 @@ namespace MessengerAPI.Controllers
                 return NotFound(e.Message);
             }
         }
-        
+
         [HttpPost]
         [Route("UnBlocked")]
         public IActionResult UnBlock(Userr user)
