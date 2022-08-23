@@ -54,7 +54,7 @@ namespace MessengerAPI.Controllers
             return userService.GetUserById(userId);
         }
         
-        [HttpPost]
+        [HttpGet]
         [Route("GetUserByUserName/{userName}")]
         public IActionResult GetUserByUserName(string userName)
         {

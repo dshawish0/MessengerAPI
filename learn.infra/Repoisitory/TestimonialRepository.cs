@@ -100,5 +100,27 @@ namespace Messenger.infra.Repoisitory
                 return false;
             return true;
         }
+        public bool AcceptTest(testimonial test)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add("@TTestId", test.TestId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            var result = dBContext.dbConnection.ExecuteAsync("testimonialCRUD_Package.AcceptTest", parameter, commandType: CommandType.StoredProcedure);
+
+            if (result == null)
+                return false;
+            return true;
+
+        }
+        public bool RejectTest(testimonial test)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add("@TTestId", test.TestId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            var result = dBContext.dbConnection.ExecuteAsync("testimonialCRUD_Package.RejectTest", parameter, commandType: CommandType.StoredProcedure);
+
+            if (result == null)
+                return false;
+            return true;
+
+        }
     }
 }
