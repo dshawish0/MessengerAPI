@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Messenger.infra.Service
 {
-    class TestimonialService : ITestimonialService
+    public class TestimonialService : ITestimonialService
     {
         private readonly ITestimonialRepository testimonialRepository;
 

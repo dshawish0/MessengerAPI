@@ -63,6 +63,9 @@ namespace MessengerAPI
             services.AddScoped<IDtoRepository, DtoRepository>();
             services.AddScoped<IDtoService, DtoService>();
 
+            services.AddScoped<ITestimonialRepository, TestimonialRepository>();
+            services.AddScoped<ITestimonialService, TestimonialService>();
+
             //add cors for connect angular
             services.AddCors(corsOptions =>
             {
