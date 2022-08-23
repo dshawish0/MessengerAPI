@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace learn.core.Service
 {
@@ -12,5 +13,7 @@ namespace learn.core.Service
         public string CreateMessage(Message ins);
         public string UpDateMessage(Message upd);
         public string DeleteMessage(int id);
+
+        public Task<IList<Message>> GetAllMessageForMessageGroup(int messageGroup_id);
     }
 }

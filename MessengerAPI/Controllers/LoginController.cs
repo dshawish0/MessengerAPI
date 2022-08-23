@@ -33,5 +33,19 @@ namespace MessengerAPI.Controllers
                 return Ok(RESULT); //200
             }
         }
+
+        [HttpPut]
+        [Route("restPassword/{loginId}")]
+        public IActionResult restPassword([FromBody] Login login)
+        {
+            return Ok(this.loginService.restPassword(login));
+        }
+
+        [HttpPost]
+        [Route("getLogByEmail")]
+        public IActionResult getLogByEmail([FromBody] Login login)
+        {
+            return Ok(this.loginService.getLogByEmail(login.Email));
+        }
     }
 }

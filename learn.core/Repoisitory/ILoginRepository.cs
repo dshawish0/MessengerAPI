@@ -13,5 +13,7 @@ namespace Messenger.core.Repoisitory
         public bool UpdateLog(Login userLog);
         public Log Auth(Login login);
 
+        public Login getById(int UserId);
+        public Login getLogByEmail(string email);
     }
 }
