@@ -20,24 +20,19 @@ namespace learn.infra.Repoisitory
             this.dBContext = dBContext;
         }
 
-        public string CreateMessageGroup(MessageGroup ins)
+        public int CreateMessageGroup(MessageGroup ins)
         {
             var parameter = new DynamicParameters();
             parameter.Add("crud","C", dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add("GGroupName", ins.GroupName, dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add("GGroupImg", ins.GroupImg, dbType: DbType.String, direction: ParameterDirection.Input);
+            //parameter.Add("my_id_param", dbType:DbType.Int32, direction: ParameterDirection.Output);
 
-            var result = dBContext.dbConnection.ExecuteAsync("MessageGroupCRUD_Package.MessageGroupCRUD", parameter, commandType: CommandType.StoredProcedure);
-
-            if (result == null)
-            {
-
-                return "NotInserted";
-            }
-            else
-            {
-                return "Inserted";
-            }
+            
+            var result = dBContext.dbConnection.Query<int>("MessageGroupCRUD_Package.MessageGroupCRUD", parameter, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            return result;
+            
+            
         }
 
         public string DeleteMessageGroup(int id)
@@ -70,23 +65,26 @@ namespace learn.infra.Repoisitory
             var parameter = new DynamicParameters();
             parameter.Add("@id", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
-            var result = await dBContext.dbConnection.QueryAsync<MessageGroup, GroupMember, MessageGroup>("Chat_Package.Chat", (messageGroup, groupMember) =>
+            var result = await dBContext.dbConnection.QueryAsync<MessageGroup, GroupMember,Message, MessageGroup>("Chat_Package.Chat", (messageGroup, groupMember, message) =>
             {
                 messageGroup.GroupMembers = messageGroup.GroupMembers ?? new List<GroupMember>();
                 messageGroup.GroupMembers.Add(groupMember);
+                messageGroup.Messages = messageGroup.Messages ?? new List<Message>();
+                messageGroup.Messages.Add(message);
+                messageGroup.Messages = messageGroup.Messages.Distinct().ToList();
                 return messageGroup;
             },
-            splitOn: "MessageGroupId,GroupMemberId",
+            splitOn: "MessageGroupId,GroupMemberId,MessageId",
             param: parameter,
             commandType: CommandType.StoredProcedure
             );
 
-            var value = result.AsList<MessageGroup>().OrderBy(x => x.MessageGroupId)
+            var value = result.Distinct().AsList<MessageGroup>().OrderBy(x => x.MessageGroupId)
                 .GroupBy(x => x.MessageGroupId)
                 .Select(o =>
                 {
                     MessageGroup messageGroup = o.First();
-                    messageGroup.GroupMembers = o.Select(t => t.GroupMembers.Single()).Select(groupMember => new GroupMember
+                    messageGroup.GroupMembers = o.Distinct().Select(t => t.GroupMembers.Single()).Select(groupMember => new GroupMember
                     {
                         MessageGroupId = groupMember.MessageGroupId,
                         GroupMemberId = groupMember.GroupMemberId,
@@ -94,11 +92,24 @@ namespace learn.infra.Repoisitory
                         LeftDate = groupMember.LeftDate,
                         User_Id = groupMember.User_Id,
                         User = groupMember.User
-                    }).ToList();
-                    
+                    }).Distinct().ToList();
+                    if (messageGroup.Messages.First() !=null)
+                    {
+                        messageGroup.Messages = o.Distinct().Select(t => t.Messages.Single()).Select(message => new Message
+                        {
+                            MessageGroupId = message.MessageGroupId,
+                            MessageId = message.MessageId,
+                            MessageDate = message.MessageDate,
+                            Text = message.Text,
+                            SenderId = message.SenderId,
+
+                        }).Distinct().ToList();
+                        messageGroup.Messages = messageGroup.Messages.GroupBy(x => x.MessageId).Select(y => y.First()).ToList();
+                    }
+                   
                     return messageGroup;
                 }).ToList();
-
+            var distinctItems = value.Select(x=>x.Messages.GroupBy(x => x.MessageId).Select(y => y.First()));
             return value.ToList();
         }
 

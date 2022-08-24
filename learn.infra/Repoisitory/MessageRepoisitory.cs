@@ -2,6 +2,7 @@
 using learn.core.Data;
 using learn.core.domain;
 using learn.core.Repoisitory;
+using Messenger.core.Data;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -69,17 +70,18 @@ namespace learn.infra.Repoisitory
             var parameter = new DynamicParameters();
             parameter.Add("@MessageGroup_ID", messageGroup_id, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
-            var result = await dBContext.dbConnection.QueryAsync<Message, MessageGroup, Message >("Chat_Package.GetMessageForMessageGroup", (message, messageGroup) =>
+            var result = await dBContext.dbConnection.QueryAsync<Message, MessageGroup,Userr, Message >("Chat_Package.GetMessageForMessageGroup", (message, messageGroup, user) =>
             {
                 message.MessageGroup = message.MessageGroup ?? new MessageGroup();
                 message.MessageGroup = messageGroup;
-
+                message.User = message.User ?? new Userr();
+                message.User = user;
 
 
                 return message;
             },
 
-            splitOn: "MessageGroupId",
+            splitOn: "MessageGroupId,userId",
             param: parameter,
             commandType: CommandType.StoredProcedure
             );

@@ -10,7 +10,7 @@ namespace learn.core.Service
     {
         public List<MessageGroup> GetAllMessageGroup();
         public MessageGroup GetMessageGroupById(int id);
-        public string CreateMessageGroup(MessageGroup ins);
+        public int CreateMessageGroup(MessageGroup ins);
         public string UpDateMessageGroup(MessageGroup upd);
         public string DeleteMessageGroup(int id);
 
