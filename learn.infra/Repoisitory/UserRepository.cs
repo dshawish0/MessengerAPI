@@ -122,7 +122,6 @@ namespace Messenger.infra.Repoisitory
             return true;
         }
 
-
         public bool IsBlocked(Userr user)
         {
             var parameter = new DynamicParameters();

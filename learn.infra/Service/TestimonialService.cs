@@ -34,10 +34,17 @@ namespace Messenger.infra.Service
         {
             return testimonialRepository.InsertTest(test);
         }
-
         public bool UpdateTest(testimonial test)
         {
             return testimonialRepository.UpdateTest(test);
+        }
+        public bool AcceptTest(testimonial test)
+        {
+            return testimonialRepository.AcceptTest(test);
+        }
+        public bool RejectTest(testimonial test)
+        {
+            return testimonialRepository.RejectTest(test);
         }
     }
 }

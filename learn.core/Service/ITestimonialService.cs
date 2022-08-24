@@ -12,5 +12,7 @@ namespace Messenger.core.Service
         public bool DeleteTest(int testId);
         public bool UpdateTest(testimonial test);
         public testimonial GetTestById(int testId);
+        public bool AcceptTest(testimonial test);
+        public bool RejectTest(testimonial test);
     }
 }

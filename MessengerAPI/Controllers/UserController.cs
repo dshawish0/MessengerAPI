@@ -35,7 +35,6 @@ namespace MessengerAPI.Controllers
         {
             return Ok(userService.DeleteUser(UserId));
         }
-
         [HttpGet]
         public List<Userr> GetAllUsers()
         {
@@ -54,13 +53,14 @@ namespace MessengerAPI.Controllers
         {
             return userService.GetUserById(userId);
         }
-        [HttpPost]
-        [Route("GetUserByEmail")]
-        public IActionResult GetUserByEmail([FromBody] Userr user)
+        
+        [HttpGet]
+        [Route("GetUserByUserName/{userName}")]
+        public IActionResult GetUserByUserName(string userName)
         {
             try
             {
-                var result = userService.GetUserByUserName(user.userName);
+                var result = userService.GetUserByUserName(userName);
                 return Ok(result);
             }
             catch (Exception e)
