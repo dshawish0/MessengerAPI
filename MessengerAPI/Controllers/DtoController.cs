@@ -1,7 +1,9 @@
-﻿using Messenger.core.Service;
+﻿using Messenger.core.DTO;
+using Messenger.core.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Threading.Tasks;
 
 namespace MessengerAPI.Controllers
 {
@@ -22,6 +24,20 @@ namespace MessengerAPI.Controllers
             try
             {
                 var result = dtoService.getAllNumberOfFriends(userId);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
+        }
+        [HttpPost]
+        [Route("CreateGroupAndMember")]
+        public async Task<IActionResult> CreateGroupAndMember([FromBody]CreateMessageGroupAndGroupMember groupAndGroupMember)
+        {
+            try
+            {
+                var result = await dtoService.createMessageGroupAndMember(groupAndGroupMember);
                 return Ok(result);
             }
             catch (Exception e)

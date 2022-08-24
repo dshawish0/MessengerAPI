@@ -35,10 +35,12 @@ namespace MessengerAPI.Controllers
         }
         [HttpPost]
         [Route("CreateMessage")]
-        public IActionResult CreateMessage([FromBody] Message ins)
+        public IActionResult CreateMessage([FromBody] Message message)
         {
-            var result = Messageservice.CreateMessage(ins);
-            return Ok(result);
+            message.MessageDate = DateTime.UtcNow;
+            
+            var result = Messageservice.CreateMessage(message);
+            return Ok();
         }
 
         [HttpPut]

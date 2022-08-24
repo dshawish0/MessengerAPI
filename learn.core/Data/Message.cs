@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Messenger.core.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
@@ -15,5 +16,7 @@ namespace learn.core.Data
 
         [ForeignKey("MessageGroupId")]
         public virtual MessageGroup MessageGroup { get; set; }
+
+        public virtual Userr User { get; set; }
     }
 }

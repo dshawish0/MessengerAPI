@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace MessengerAPI.Controllers
 {
@@ -29,7 +30,7 @@ namespace MessengerAPI.Controllers
         public IActionResult DeleteMessageGroup(int id)
         {
             var result = MessageGroupservice.DeleteMessageGroup(id);
-            return Ok(result);
+            return Ok();
 
         }
         [HttpPost]
@@ -37,7 +38,7 @@ namespace MessengerAPI.Controllers
         public IActionResult MessageGroup([FromBody] MessageGroup cc)
         {
             var result = MessageGroupservice.CreateMessageGroup(cc);
-            return Ok(result);
+            return Ok();
         }
 
         [HttpPut]
@@ -45,7 +46,7 @@ namespace MessengerAPI.Controllers
         public IActionResult UpDateMessageGroup([FromBody] MessageGroup cc)
         {
             var result = MessageGroupservice.UpDateMessageGroup(cc);
-            return Ok(result);
+            return Ok();
         }
         [HttpGet]
         [Route("GetMessageGroupById/{id}")]
@@ -57,11 +58,11 @@ namespace MessengerAPI.Controllers
 
         [HttpGet]
         [Route("GetFullMessageGroup/{id}")]
-        public IActionResult GetFullMessageGroup(int id)
+        public async Task<IActionResult> GetFullMessageGroup(int id)
         {
             try
             {
-                var result = MessageGroupservice.GetMessageGroupForUser(id);
+                var result = await MessageGroupservice.GetMessageGroupForUser(id);
                 return Ok(result);
             }
             catch (Exception e)

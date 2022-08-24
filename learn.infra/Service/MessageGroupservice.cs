@@ -15,7 +15,7 @@ namespace learn.infra.Service
         {
             this.MessageGroupRepoisitory = MessageGroupRepoisitory;
         }
-        public string CreateMessageGroup(MessageGroup ins)
+        public int CreateMessageGroup(MessageGroup ins)
         {
            return MessageGroupRepoisitory.CreateMessageGroup(ins);
         }
@@ -31,8 +31,9 @@ namespace learn.infra.Service
         }
 
         public async Task<IList<MessageGroup>> GetMessageGroupForUser(int id)
-        {
-            return await MessageGroupRepoisitory.GetMessageGroupForUser(id);
+        { 
+            var res = await MessageGroupRepoisitory.GetMessageGroupForUser(id);
+            return res;
         }
 
         public MessageGroup GetMessageGroupById(int id)
