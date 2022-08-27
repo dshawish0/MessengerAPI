@@ -1,4 +1,5 @@
 ﻿using Messenger.core.Data;
+using Messenger.core.Repoisitory;
 using Messenger.core.Service;
 using System;
 using System.Collections.Generic;
@@ -8,34 +9,34 @@ namespace Messenger.infra.Service
 {
     public class HomeService : IHomeService
     {
-        private readonly IHomeService homeService;
-        public HomeService(IHomeService homeService)
+        private readonly IHomeRepoisitory homeRepoisitory;
+        public HomeService(IHomeRepoisitory homeRepoisitory)
         {
-            this.homeService = homeService;
+            this.homeRepoisitory = homeRepoisitory;
         }
         public bool DeleteHome(int id)
         {
-            return homeService.DeleteHome(id);
+            return homeRepoisitory.DeleteHome(id);
         }
 
         public List<Home> GetHome()
         {
-            return homeService.GetHome();
+            return homeRepoisitory.GetHome();
         }
 
         public Home GetHomeById(int id)
         {
-            return homeService.GetHomeById(id);
+            return homeRepoisitory.GetHomeById(id);
         }
 
         public bool InsertHome(Home home)
         {
-            return homeService.InsertHome(home);
+            return homeRepoisitory.InsertHome(home);
         }
 
         public bool UpdateHome(Home home)
         {
-            return homeService.UpdateHome(home);
+            return homeRepoisitory.UpdateHome(home);
         }
     }
 }
