@@ -37,6 +37,7 @@ namespace learn.infra.Repoisitory
 
         public string DeleteMessageGroup(int id)
         {
+            //
             var parameter = new DynamicParameters();
             parameter.Add("crud ", "D", dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add("MMessageGroupId", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
