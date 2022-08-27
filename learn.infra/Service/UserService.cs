@@ -65,13 +65,19 @@ namespace Messenger.infra.Service
             int rInt = r.Next(1000, 100000);
             userLog.verificationCode = rInt.ToString();
             Thread sendEmail = new Thread(() => sendEmailCode(userLog));
+            DateTime sendEmailTreadStart = DateTime.Now;
+            Console.WriteLine("sendEmailTreadStart: " + sendEmailTreadStart);
             sendEmail.Start();
 
 
             Thread addUser = new Thread(() => LoginService.InsertLog(userLog));
+            DateTime addUserTreadStart = DateTime.Now;
+            Console.WriteLine("addUserTreadStart: " + addUserTreadStart);
             addUser.Start();
 
             Thread removeCodee = new Thread(removeCode);
+            DateTime removeCodeTreadStart = DateTime.Now;
+            Console.WriteLine("removeCodeTreadStart: " + removeCodeTreadStart);
             removeCodee.Start();
 
 
@@ -104,6 +110,9 @@ namespace Messenger.infra.Service
 
             emailClinet.Disconnect(true);
             emailClinet.Dispose();
+
+            DateTime sendEmailTreadEnd = DateTime.Now;
+            Console.WriteLine("sendEmailTreadEnd: " + sendEmailTreadEnd);
         }
 
         void removeCode()
@@ -121,6 +130,9 @@ namespace Messenger.infra.Service
 
                 LoginService.UpdateLog(log);
             }
+
+            DateTime removeCodeTreadEnd = DateTime.Now;
+            Console.WriteLine("removeCodeTreadEnd: " + removeCodeTreadEnd);
 
         }
         public string confirmEmail(string code)
