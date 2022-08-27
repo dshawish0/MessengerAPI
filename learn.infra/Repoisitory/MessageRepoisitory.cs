@@ -46,7 +46,8 @@ namespace learn.infra.Repoisitory
             var parameter = new DynamicParameters();
             parameter.Add("crud ", "D", dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add("MMessageId", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            var result = dBContext.dbConnection.Execute("MessageCRUD_Package .MessageCRUD", parameter, commandType: CommandType.StoredProcedure);
+            var result = dBContext.dbConnection.ExecuteAsync("MessageCRUD_Package .MessageCRUD", parameter, commandType: CommandType.StoredProcedure);
+            
             if (result == null)
             {
                 return "Notdelete";

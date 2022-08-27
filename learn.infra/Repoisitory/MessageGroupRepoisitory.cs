@@ -41,6 +41,7 @@ namespace learn.infra.Repoisitory
             parameter.Add("crud ", "D", dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add("MMessageGroupId", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
             var result = dBContext.dbConnection.ExecuteAsync("MessageGroupCRUD_Package.MessageGroupCRUD", parameter, commandType: CommandType.StoredProcedure);
+            
             if (result == null)
             {
                 return "Notdelete";
