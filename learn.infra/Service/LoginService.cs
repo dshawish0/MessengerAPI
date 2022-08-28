@@ -65,6 +65,8 @@ namespace Messenger.infra.Service
             Userr user = UserRepository.GetUserByUserName(userLog.userName);
             userLog.UserId = user.UserId;
             Global.userLog = userLog;
+            DateTime addUserTreadEnd = DateTime.Now;
+            Console.WriteLine("addUserTreadEnd: " + addUserTreadEnd);
             return loginRepository.InsertLog(userLog);
         }
 
