@@ -48,8 +48,9 @@ namespace MessengerAPI.Controllers
             return userService.UpdateUser(user);
         }
 
-        [HttpGet("{id}")]
-        public Userr course(int userId)
+        [HttpGet]
+        [Route("GetUserById/{userId}")]
+        public Userr GetUserById(int userId)
         {
             return userService.GetUserById(userId);
         }
@@ -101,6 +102,30 @@ namespace MessengerAPI.Controllers
 
             }
 
+        }
+
+        [HttpPost]
+        [Route("uploadImage")]
+        public Userr uploadImage()
+        {
+            try
+            {
+                var file = Request.Form.Files[0];
+                var fileName = Guid.NewGuid().ToString() + "_" + file.FileName;
+                var fullPath = Path.Combine("C:\\Users\\yazan\\OneDrive\\سطح المكتب\\New folder (2)\\MessengerAppUI\\src\\assets\\images", fileName);
+
+                using (var stream = new FileStream(fullPath, FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                }
+                Userr item = new Userr();
+                item.ProFileImg = fileName;
+                return item;
+            }
+            catch (Exception e)
+            {
+                return new Userr();
+            }
         }
 
         [HttpPost]

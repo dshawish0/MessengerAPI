@@ -1,6 +1,7 @@
 ﻿using learn.core.Data;
 using learn.core.Repoisitory;
 using learn.core.Service;
+using Messenger.core.DTO;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -43,6 +44,11 @@ namespace learn.infra.Service
         public string UpDateMessage(Message upd)
         {
             return MessageRepoisitory.UpDateMessage(upd);
+        }
+
+        public async Task<IList<Message>> SearchMessageBetweenTwoDate(SearchMessageBetweenDate messageBetweenDate)
+        {
+            return await MessageRepoisitory.SearchMessageBetweenTwoDate(messageBetweenDate);
         }
     }
 }
