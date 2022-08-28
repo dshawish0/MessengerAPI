@@ -90,8 +90,9 @@ namespace Messenger.infra.Repoisitory
             parameter.Add
                 ("@Llocation", footer.location, dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add
-               ("@PphoneNumber", footer.phoneNumber, dbType: DbType.String, direction: ParameterDirection.Input);
-
+               ("@PphoneNumber", footer.phoneNumber, dbType: DbType.String, direction: ParameterDirection.Input); 
+                parameter.Add
+               ("@Eemail", footer.email, dbType: DbType.String, direction: ParameterDirection.Input);
             var result = dBContext.dbConnection.ExecuteAsync
                 ("FooterCRUD_Package.FooterCRUD", parameter, commandType: CommandType.StoredProcedure);
 

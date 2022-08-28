@@ -48,8 +48,8 @@ namespace MessengerAPI.Controllers
             return userService.UpdateUser(user);
         }
 
-        [HttpGet("{id}")]
-        public Userr course(int userId)
+        [HttpGet("GetUserById/{userId}")]
+        public Userr GetUserById(int userId)
         {
             return userService.GetUserById(userId);
         }
@@ -75,6 +75,7 @@ namespace MessengerAPI.Controllers
         {
             return Ok(userService.confirmEmail(code));
         }
+
 
         [HttpPost]
         [Route("upLoadImg")]
