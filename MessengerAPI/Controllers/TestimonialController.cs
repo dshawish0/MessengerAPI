@@ -54,5 +54,19 @@ namespace MessengerAPI.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("GetUserById")]
+        public List<testimonial> GetUserById(testimonial test)
+        {
+            return TestimonialService.GetUserById(test.userId);
+
+        }
+        [HttpPost]
+        [Route("Getpublishdate")]
+        public IActionResult Getpublishdate(testimonial test)
+        {
+            return Ok(TestimonialService.Getpublishdate(test));
+        }
+
     }
 }
