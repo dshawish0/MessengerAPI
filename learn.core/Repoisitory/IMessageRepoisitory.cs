@@ -1,4 +1,5 @@
 ﻿using learn.core.Data;
+using Messenger.core.DTO;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,5 +16,7 @@ namespace learn.core.Repoisitory
         public string DeleteMessage(int id);
 
         public Task<IList<Message>> GetAllMessageForMessageGroup(int messageGroup_id);
+        public Task<IList<Message>> SearchMessageBetweenTwoDate(SearchMessageBetweenDate messageBetweenDate);
+
     }
 }

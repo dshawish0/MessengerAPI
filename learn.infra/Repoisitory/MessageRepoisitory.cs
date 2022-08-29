@@ -3,6 +3,7 @@ using learn.core.Data;
 using learn.core.domain;
 using learn.core.Repoisitory;
 using Messenger.core.Data;
+using Messenger.core.DTO;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -120,6 +121,31 @@ namespace learn.infra.Repoisitory
             {
                 return "UpDate";
             }
+        }
+
+        public async Task<IList<Message>> SearchMessageBetweenTwoDate(SearchMessageBetweenDate messageBetweenDate)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add("@MessageGroup_ID", messageBetweenDate.messageGroupId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@StartDate", messageBetweenDate.StartDate, dbType: DbType.Date, direction: ParameterDirection.Input);
+            parameter.Add("@EndDate", messageBetweenDate.EndDate, dbType: DbType.Date, direction: ParameterDirection.Input);
+
+            var result = await dBContext.dbConnection.QueryAsync<Message, MessageGroup, Userr, Message>("Chat_Package.SearchMessageBetweenDate", (message, messageGroup, user) =>
+            {
+                message.MessageGroup = message.MessageGroup ?? new MessageGroup();
+                message.MessageGroup = messageGroup;
+                message.User = message.User ?? new Userr();
+                message.User = user;
+
+
+                return message;
+            },
+
+            splitOn: "MessageGroupId,userId",
+            param: parameter,
+            commandType: CommandType.StoredProcedure
+            );
+            return result.ToList();
         }
     }
 }

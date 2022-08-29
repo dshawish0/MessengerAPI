@@ -1,6 +1,7 @@
 ﻿using learn.core.Data;
 using learn.core.Service;
 using learn.infra.Service;
+using Messenger.core.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -65,6 +66,21 @@ namespace MessengerAPI.Controllers
             try
             {
                 var result = await Messageservice.GetAllMessageForMessageGroup(messageGroup_Id);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("SearchMessageBetweenDate")]
+        public async Task<IActionResult> SearchMessageBetweenDate([FromBody] SearchMessageBetweenDate searchMessage)
+        {
+            try
+            {
+                var result = await Messageservice.SearchMessageBetweenTwoDate(searchMessage);
                 return Ok(result);
             }
             catch (Exception e)

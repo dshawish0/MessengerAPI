@@ -1,4 +1,5 @@
-﻿using Messenger.core.DTO;
+﻿using learn.core.Data;
+using Messenger.core.DTO;
 using Messenger.core.Repoisitory;
 using Messenger.core.Service;
 using System;
@@ -26,5 +27,7 @@ namespace Messenger.infra.Service
         {
             return dtoRepository.getAllNumberOfFriends(userId);
         }
+
+       
     }
 }
