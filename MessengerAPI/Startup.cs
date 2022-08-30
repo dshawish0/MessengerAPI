@@ -73,18 +73,19 @@ namespace MessengerAPI
             services.AddScoped<IFooterService, FooterService>();
 
             //add cors for connect angular
-            services.AddCors(corsOptions =>
-            {
-                corsOptions.AddPolicy("policy",
-                builder =>
-                {
-                    builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
-                });
-            });
+            //services.AddCors(corsOptions =>
+            //{
+            //    corsOptions.AddPolicy("policy",
+            //    builder =>
+            //    {
+            //        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+            //    });
+            //});
+
+            services.AddCors();
 
             services.AddControllers().AddNewtonsoftJson(options =>
-    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-);
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddAuthentication(x =>
             {
@@ -108,6 +109,8 @@ namespace MessengerAPI
 
            });
 
+            services.AddSignalR();
+
             services.AddControllers();
         }
 
@@ -124,7 +127,12 @@ namespace MessengerAPI
             app.UseRouting();
 
             //add cors for connect angular
-            app.UseCors("policy");
+            //app.UseCors("policy");
+            app.UseCors(p =>
+            {
+                p.WithOrigins("http://localhost:4200")
+                .AllowAnyHeader().AllowAnyMethod().AllowCredentials();
+            });
 
             
 
@@ -133,6 +141,7 @@ namespace MessengerAPI
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<Chat>("/chat");
             });
         }
     }
