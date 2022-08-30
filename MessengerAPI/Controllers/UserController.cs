@@ -159,5 +159,28 @@ namespace MessengerAPI.Controllers
 
             }
         }
+        [HttpPost]
+        [Route("uploadImageAdmin")]
+        public Userr uploadImageAdmin()
+        {
+            try
+            {
+                var file = Request.Form.Files[0];
+                var fileName = Guid.NewGuid().ToString() + "_" + file.FileName;
+                var fullPath = Path.Combine("C:\\Users\\Mahmoud Bani-Hani\\Desktop\\FinalProject\\MessengerAppUI\\src\\assets\\Img", fileName);
+
+                using (var stream = new FileStream(fullPath, FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                }
+                Userr item = new Userr();
+                item.ProFileImg = fileName;
+                return item;
+            }
+            catch (Exception e)
+            {
+                return new Userr();
+            }
+        }
     }
 }

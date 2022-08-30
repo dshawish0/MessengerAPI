@@ -41,7 +41,7 @@ namespace MessengerAPI.Controllers
             {
                 var file = Request.Form.Files[0];
                 var fileName = Guid.NewGuid().ToString() + "-" + file.FileName;
-                var fullPath = Path.Combine("C:\\Users\\Mahmoud Bani-Hani\\Desktop\\FinalProject\\MessengerAppUI\\src\\assets\\Admin\\img", fileName);
+                var fullPath = Path.Combine("C:\\Users\\Mahmoud Bani-Hani\\Desktop\\FinalProject\\MessengerAppUI\\src\\assets\\Img", fileName);
 
                 using (var stream = new FileStream(fullPath, FileMode.Create))
                 {
