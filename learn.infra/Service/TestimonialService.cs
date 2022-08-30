@@ -46,5 +46,13 @@ namespace Messenger.infra.Service
         {
             return testimonialRepository.RejectTest(test);
         }
+        public List<testimonial> GetUserById(int userId)
+        {
+            return testimonialRepository.GetUserById(userId);
+        }
+        public List<testimonial> Getpublishdate(testimonial test)
+        {
+            return testimonialRepository.Getpublishdate(test);
+        }
     }
 }

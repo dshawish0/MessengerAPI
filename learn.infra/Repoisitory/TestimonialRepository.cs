@@ -122,5 +122,19 @@ namespace Messenger.infra.Repoisitory
             return true;
 
         }
+        public List<testimonial> GetUserById(int userId)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add("@UUserId", userId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            IEnumerable<testimonial> result = dBContext.dbConnection.Query<testimonial>("testimonialCRUD_Package.GetUserById", parameter, commandType: CommandType.StoredProcedure);
+            return result.ToList();
+        }
+        public List<testimonial> Getpublishdate(testimonial testimonial)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add("@Tpublishdate", testimonial.publishDate.Date, dbType: DbType.Date, direction: ParameterDirection.Input);
+            IEnumerable<testimonial> result = dBContext.dbConnection.Query<testimonial>("testimonialCRUD_Package.Getpublishdate", parameter, commandType: CommandType.StoredProcedure);
+            return result.ToList();
+        }
     }
 }
