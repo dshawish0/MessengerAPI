@@ -2,7 +2,6 @@
 using learn.core.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 
 namespace MessengerAPI.Controllers
@@ -34,8 +33,7 @@ namespace MessengerAPI.Controllers
         [Route("Create")]
         public IActionResult InsertReportUser([FromBody] ReportUser report)
         {
-            report.ReportDate = DateTime.Now;
-            report.Status = 0;
+
             var result = reportUserService.InsertReportUser(report);
             return Ok(result);
         }
@@ -52,6 +50,22 @@ namespace MessengerAPI.Controllers
         public IActionResult DeleteReportUser(int id)
         {
             var result = reportUserService.DeleteReportUser(id);
+            return Ok(result);
+        }
+
+        [HttpPut]
+        [Route("acceptingReportUser")]
+        public IActionResult acceptingReportUser(ReportUser report)
+        {
+            var result = reportUserService.acceptingReportUser(report.ReportUserId);
+            return Ok(result);
+        }
+
+        [HttpPut]
+        [Route("rejectreport")]
+        public IActionResult rejectreport(ReportUser report)
+        {
+            var result = reportUserService.rejectreport(report.ReportUserId);
             return Ok(result);
         }
     }
