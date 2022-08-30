@@ -39,7 +39,7 @@ namespace MessengerAPI.Controllers
         [Route("CreateMessage")]
         public IActionResult CreateMessage([FromBody] Message message)
         {
-            message.MessageDate = DateTime.UtcNow;
+            //message.MessageDate = DateTime.UtcNow;
             
             var result = Messageservice.CreateMessage(message);
             return Ok();
