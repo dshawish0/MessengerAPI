@@ -62,7 +62,7 @@ namespace MessengerAPI.Controllers
         }
 
         [HttpPut]
-        [Route("UpDateServices")]
+        [Route("update")]
         public IActionResult UpDateServices([FromBody] Services services)
         {
             try
@@ -76,12 +76,12 @@ namespace MessengerAPI.Controllers
             }
         }
         [HttpDelete]
-        [Route("DeleteServices")]
-        public IActionResult DeleteServices([FromBody] Services services)
+        [Route("DeleteServices/{id}")]
+        public IActionResult DeleteServices(int id)
         {
             try
             {
-                servicesService.DeleteServices(services.Serviceid);
+                servicesService.DeleteServices(id);
                 return Ok();
             }
             catch (Exception e)

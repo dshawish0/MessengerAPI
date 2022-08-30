@@ -15,6 +15,12 @@ namespace learn.infra.Service
         {
             this.reportUserRepoisitory = reportUserRepoisitory;
         }
+
+        public bool acceptingReportUser(int id)
+        {
+           return reportUserRepoisitory.acceptingReportUser(id);
+        }
+
         public bool DeleteReportUser(int id)
         {
             return reportUserRepoisitory.DeleteReportUser(id);
@@ -33,6 +39,11 @@ namespace learn.infra.Service
         public bool InsertReportUser(ReportUser report)
         {
             return reportUserRepoisitory.InsertReportUser(report);
+        }
+
+        public bool rejectreport(int id)
+        {
+            return reportUserRepoisitory.rejectreport(id);  
         }
 
         public bool UpdateReportUser(ReportUser report)

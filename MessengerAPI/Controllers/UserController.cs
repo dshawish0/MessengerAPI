@@ -48,7 +48,7 @@ namespace MessengerAPI.Controllers
         {
             return userService.UpdateUser(user);
         }
-        
+
         [HttpGet("{id}")]
         public Userr course(int userId)
         {
@@ -68,7 +68,7 @@ namespace MessengerAPI.Controllers
                 return NotFound(e.Message);
             }
         }
-        
+
         [HttpGet]
         [Route("ConfirmEmail/{code}")]
         public IActionResult confirmEmail(string code)
@@ -86,7 +86,7 @@ namespace MessengerAPI.Controllers
                 var fileName = Guid.NewGuid().ToString() + "_" + file.FileName;
                 var fullPath = Path.Combine("D:\\MessengerAppUI\\MessengerAppUI\\src\\assets\\Img", fileName);
 
-                using(var stream = new FileStream(fullPath, FileMode.Create))
+                using (var stream = new FileStream(fullPath, FileMode.Create))
                 {
                     file.CopyTo(stream);
                 }
@@ -95,40 +95,41 @@ namespace MessengerAPI.Controllers
                 item.ProFileImg = fileName;
                 return item;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return null;
 
-
-        [HttpPost]
-        [Route("IsBlocked/{userId}")]
-        public IActionResult IsBlocked(int userId)
-        {
-            try
-            {
-                var result = userService.IsBlocked(userId);
-                return Ok(result);
-            }
-            catch (Exception e)
-            {
-                return NotFound(e.Message);
             }
         }
-        
-        [HttpPost]
-        [Route("UnBlocked/{userId}")]
-        public IActionResult UnBlock(int userId)
-        {
-            try
-            {
-                var result = userService.UnBlock(userId);
-                return Ok(result);
-            }
-            catch (Exception e)
-            {
-                return NotFound(e.Message);
+                [HttpPost]
+                [Route("IsBlocked/{userId}")]
+                public IActionResult IsBlocked(int userId)
+                {
+                    try
+                    {
+                        var result = userService.IsBlocked(userId);
+                        return Ok(result);
+                    }
+                    catch (Exception e)
+                    {
+                        return NotFound(e.Message);
+                    }
+                }
 
+                [HttpPost]
+                [Route("UnBlocked/{userId}")]
+                public IActionResult UnBlock(int userId)
+                {
+                    try
+                    {
+                        var result = userService.UnBlock(userId);
+                        return Ok(result);
+                    }
+                    catch (Exception e)
+                    {
+                        return NotFound(e.Message);
+
+                    }
+                }
             }
         }
-    }
-}

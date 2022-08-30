@@ -52,5 +52,21 @@ namespace MessengerAPI.Controllers
             var result = reportUserService.DeleteReportUser(id);
             return Ok(result);
         }
+
+        [HttpPut]
+        [Route("acceptingReportUser")]
+        public IActionResult acceptingReportUser(ReportUser report)
+        {
+            var result = reportUserService.acceptingReportUser(report.ReportUserId);
+            return Ok(result);
+        }
+
+        [HttpPut]
+        [Route("rejectreport")]
+        public IActionResult rejectreport(ReportUser report)
+        {
+            var result = reportUserService.rejectreport(report.ReportUserId);
+            return Ok(result);
+        }
     }
 }

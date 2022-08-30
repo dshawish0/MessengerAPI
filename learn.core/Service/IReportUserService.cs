@@ -12,5 +12,8 @@ namespace learn.core.Service
         public bool UpdateReportUser(ReportUser report);
         public bool DeleteReportUser(int id);
         public List<ReportUser> GetReportUsersById(int id);
+        public bool acceptingReportUser(int id);
+        public bool rejectreport(int id);
+
     }
 }

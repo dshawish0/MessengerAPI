@@ -99,5 +99,28 @@ namespace learn.infra.Repoisitory
                 return false;
             }            
         }
+        public bool acceptingReportUser(int id)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add("RReportUserId",id,dbType: DbType.Int32, direction: ParameterDirection.Input);
+            var result = dBContext.dbConnection.ExecuteAsync("ReportUserCRUD_Package.acceptingReportUser", parameter, commandType: CommandType.StoredProcedure);
+
+            if (result==null)
+                return false;
+            else
+                return true;   
+        }
+
+        public bool rejectreport(int id)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add("RReportUserId", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            var result = dBContext.dbConnection.ExecuteAsync("ReportUserCRUD_Package.rejectreport", parameter, commandType: CommandType.StoredProcedure);
+            
+            if (result == null)
+                return false;
+            else
+                return true;
+        }
     }
 }
