@@ -101,35 +101,83 @@ namespace MessengerAPI.Controllers
 
             }
         }
-                [HttpPost]
-                [Route("IsBlocked/{userId}")]
-                public IActionResult IsBlocked(int userId)
-                {
-                    try
-                    {
-                        var result = userService.IsBlocked(userId);
-                        return Ok(result);
-                    }
-                    catch (Exception e)
-                    {
-                        return NotFound(e.Message);
-                    }
-                }
+        [HttpPost]
+        [Route("uploadImage")]
+        public Userr uploadImage()
+        {
+            try
+            {
+                var file = Request.Form.Files[0];
+                var fileName = Guid.NewGuid().ToString() + "_" + file.FileName;
+                var fullPath = Path.Combine("C:\\Users\\yazan\\OneDrive\\سطح المكتب\\New folder (2)\\MessengerAppUI\\src\\assets\\images", fileName);
 
-                [HttpPost]
-                [Route("UnBlocked/{userId}")]
-                public IActionResult UnBlock(int userId)
+                using (var stream = new FileStream(fullPath, FileMode.Create))
                 {
-                    try
-                    {
-                        var result = userService.UnBlock(userId);
-                        return Ok(result);
-                    }
-                    catch (Exception e)
-                    {
-                        return NotFound(e.Message);
-
-                    }
+                    file.CopyTo(stream);
                 }
+                Userr item = new Userr();
+                item.ProFileImg = fileName;
+                return item;
+            }
+            catch (Exception e)
+            {
+                return new Userr();
             }
         }
+        [HttpPost]
+        [Route("IsBlocked")]
+        public IActionResult IsBlocked([FromBody] Userr user)
+        {
+            try
+            {
+                var result = userService.IsBlocked(user);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("UnBlocked")]
+        public IActionResult UnBlock(Userr user)
+        {
+            try
+            {
+                var result = userService.UnBlock(user);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+
+            }
+        }
+        [HttpPost]
+        [Route("uploadImageAdmin")]
+        public Userr uploadImageAdmin()
+        {
+            try
+            {
+                var file = Request.Form.Files[0];
+                var fileName = Guid.NewGuid().ToString() + "_" + file.FileName;
+                var fullPath = Path.Combine("C:\\Users\\Mahmoud Bani-Hani\\Desktop\\FinalProject\\MessengerAppUI\\src\\assets\\Img", fileName);
+
+                using (var stream = new FileStream(fullPath, FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                }
+                Userr item = new Userr();
+                item.ProFileImg = fileName;
+                return item;
+            }
+            catch (Exception e)
+            {
+                return new Userr();
+            }
+        }
+
+
+    }
+}
