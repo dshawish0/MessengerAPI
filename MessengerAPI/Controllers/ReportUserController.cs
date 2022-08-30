@@ -2,6 +2,7 @@
 using learn.core.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 
 namespace MessengerAPI.Controllers
@@ -33,7 +34,8 @@ namespace MessengerAPI.Controllers
         [Route("Create")]
         public IActionResult InsertReportUser([FromBody] ReportUser report)
         {
-
+            report.ReportDate = DateTime.Now;
+            report.Status = 0;
             var result = reportUserService.InsertReportUser(report);
             return Ok(result);
         }

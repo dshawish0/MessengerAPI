@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace MessengerAPI.Controllers
@@ -88,5 +89,36 @@ namespace MessengerAPI.Controllers
                 return NotFound(e.Message);
             }
         }
+
+        [HttpPost]
+        [Route("uploadImageMessage")]
+        public Message uploadImageMessage()
+        {
+            try
+            {
+                var file = Request.Form.Files[0];
+                var fileName="";
+                //foreach (var c in file)
+                //{
+                     fileName = file.FileName;
+                    var fullPath = Path.Combine("C:\\Users\\yazan\\OneDrive\\سطح المكتب\\New folder (2)\\MessengerAppUI\\src\\assets\\images", fileName);
+
+                    using (var stream = new FileStream(fullPath, FileMode.Create))
+                    {
+                        file.CopyTo(stream);
+                    }
+                //}
+                
+                Message item = new Message();
+                item.Text = fileName;
+                
+                return item;
+            }
+            catch (Exception e)
+            {
+                return new Message();
+            }
+        }
+
     }
 }
