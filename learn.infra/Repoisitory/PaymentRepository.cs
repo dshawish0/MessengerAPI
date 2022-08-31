@@ -2,11 +2,13 @@
 using learn.core.Data;
 using learn.core.domain;
 using learn.core.Repoisitory;
+using Messenger.core.Data;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace learn.infra.Repoisitory
 {
@@ -56,6 +58,27 @@ namespace learn.infra.Repoisitory
 
             IEnumerable<Payments> result = dbContext.dbConnection.Query<Payments>("PaymentsCrud_Package.getById", p, commandType: System.Data.CommandType.StoredProcedure);
             return result.FirstOrDefault();
+        }
+
+        public async Task<IList<Payments>> GetPaymentsByUserId(int userId)
+        {
+            var p = new DynamicParameters();
+            p.Add("@PuserId", userId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+
+            var result = await dbContext.dbConnection.QueryAsync<Payments, Services, Userr,  Payments>("PaymentsCrud_Package.GetPaymentsByUserId", (payment, service, user) =>
+            {
+                payment.User = payment.User ?? new Userr();
+                payment.User = user;
+
+                payment.Service = payment.Service ?? new Services();
+                payment.Service = service;
+                return payment;
+            },
+            splitOn: "service_Id,userId",
+            param: p,
+            commandType: CommandType.StoredProcedure
+        );
+            return result.ToList();
         }
 
         public void UpDatePayments(Payments payment)

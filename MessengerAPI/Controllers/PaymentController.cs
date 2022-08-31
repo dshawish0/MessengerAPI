@@ -3,6 +3,7 @@ using learn.core.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Threading.Tasks;
 
 namespace MessengerAPI.Controllers
 {
@@ -80,6 +81,21 @@ namespace MessengerAPI.Controllers
             {
                 paymentService.DeletePayments(payment.Paymentid);
                 return Ok();
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("GetPaymentsByUserId/{userId}")]
+        public async Task<IActionResult> GetPaymentsByUserId(int userId)
+        {
+            try
+            {
+                var result = await paymentService.GetPaymentsByUserId(userId);
+                return Ok(result);
             }
             catch (Exception e)
             {

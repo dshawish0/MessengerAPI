@@ -4,6 +4,7 @@ using learn.core.Service;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace learn.infra.Service
 {
@@ -33,6 +34,11 @@ namespace learn.infra.Service
         public Payments GetPaymentsById(int id)
         {
             return paymentRepository.GetPaymentsById(id);
+        }
+
+        public async Task<IList<Payments>> GetPaymentsByUserId(int userId)
+        {
+            return await paymentRepository.GetPaymentsByUserId(userId);
         }
 
         public void UpDatePayments(Payments payment)
