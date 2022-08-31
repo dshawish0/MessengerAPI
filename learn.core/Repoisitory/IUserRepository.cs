@@ -16,6 +16,7 @@ namespace Messenger.core.Repoisitory
         public Userr GetUserByUserName(string userName);
         public bool IsBlocked(Userr user);
         public bool UnBlock(Userr user);
+        public bool activationChange(Userr user);
 
     }
 }

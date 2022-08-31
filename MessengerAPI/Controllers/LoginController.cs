@@ -14,9 +14,11 @@ namespace MessengerAPI.Controllers
     public class LoginController : ControllerBase
     {
         private readonly ILoginService loginService;
-        public LoginController(ILoginService loginService)
+        private readonly IUserService userService;
+        public LoginController(ILoginService loginService, IUserService userService)
         {
             this.loginService = loginService;
+            this.userService = userService;
         }
 
         [HttpPost]
@@ -46,6 +48,15 @@ namespace MessengerAPI.Controllers
         public IActionResult getLogByEmail([FromBody] Login login)
         {
             return Ok(this.loginService.getLogByEmail(login.Email));
+        }
+
+        [HttpPost]
+        [Route("logOut/{userId}")]
+        public IActionResult logOut(int userId)
+        {
+            var result = this.userService.GetUserById(userId);
+            result.IsActive = 0;
+            return Ok(this.userService.activationChange(result));
         }
     }
 }

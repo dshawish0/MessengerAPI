@@ -131,6 +131,17 @@ namespace Messenger.infra.Repoisitory
                 return false;
             return true;
         }
+
+        public bool activationChange(Userr user)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add("@UUserId", user.UserId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@IIsActive", user.IsActive, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            var result = dBContext.dbConnection.ExecuteAsync("UserrCRUD_Package.activationChange", parameter, commandType: CommandType.StoredProcedure);
+            if (result == null)
+                return false;
+            return true;
+        }
         public bool UnBlock(Userr user)
         {
             var parameter = new DynamicParameters();
