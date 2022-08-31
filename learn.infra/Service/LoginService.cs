@@ -52,6 +52,11 @@ namespace Messenger.infra.Service
             var generateToken = tokenHandeler.CreateToken(tokenDescirptor);
 
 
+            var restlt=UserRepository.GetUserById(result.User_Id);
+            restlt.IsActive = 1;
+            UserRepository.activationChange(restlt);
+
+
             return tokenHandeler.WriteToken(generateToken);
         }
 

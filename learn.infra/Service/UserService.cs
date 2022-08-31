@@ -166,5 +166,10 @@ namespace Messenger.infra.Service
             return UserRepository.UnBlock(user);
 
         }
+
+        public bool activationChange(Userr user)
+        {
+            return UserRepository.activationChange(user);
+        }
     }
 }
