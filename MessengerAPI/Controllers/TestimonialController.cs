@@ -1,4 +1,5 @@
 ﻿using Messenger.core.Data;
+using Messenger.core.DTO;
 using Messenger.core.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -66,6 +67,12 @@ namespace MessengerAPI.Controllers
         public IActionResult Getpublishdate(testimonial test)
         {
             return Ok(TestimonialService.Getpublishdate(test));
+        }
+        [HttpGet]
+        [Route("GetTestimonialShow")]
+        public IActionResult GetTestimonialShow()
+        {
+            return Ok(TestimonialService.GetTestimonialShow());
         }
 
     }

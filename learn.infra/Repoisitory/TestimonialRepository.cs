@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using learn.core.domain;
 using Messenger.core.Data;
+using Messenger.core.DTO;
 using Messenger.core.Repoisitory;
 using System;
 using System.Collections.Generic;
@@ -134,6 +135,13 @@ namespace Messenger.infra.Repoisitory
             var parameter = new DynamicParameters();
             parameter.Add("@Tpublishdate", testimonial.publishDate.Date, dbType: DbType.Date, direction: ParameterDirection.Input);
             IEnumerable<testimonial> result = dBContext.dbConnection.Query<testimonial>("testimonialCRUD_Package.Getpublishdate", parameter, commandType: CommandType.StoredProcedure);
+            return result.ToList();
+        }
+        public List<GetTestimonialShow> GetTestimonialShow()
+        {
+            var parameter = new DynamicParameters();
+            IEnumerable<GetTestimonialShow> result = dBContext.dbConnection.Query<GetTestimonialShow>
+                ("testimonialCRUD_Package.GetTestimonialShow", commandType: CommandType.StoredProcedure);
             return result.ToList();
         }
     }

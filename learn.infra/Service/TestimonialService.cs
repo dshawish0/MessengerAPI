@@ -1,4 +1,5 @@
 ﻿using Messenger.core.Data;
+using Messenger.core.DTO;
 using Messenger.core.Repoisitory;
 using Messenger.core.Service;
 using System;
@@ -53,6 +54,10 @@ namespace Messenger.infra.Service
         public List<testimonial> Getpublishdate(testimonial test)
         {
             return testimonialRepository.Getpublishdate(test);
+        }
+        public List<GetTestimonialShow> GetTestimonialShow()
+        {
+            return testimonialRepository.GetTestimonialShow();
         }
     }
 }

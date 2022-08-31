@@ -1,4 +1,5 @@
 ﻿using Messenger.core.Data;
+using Messenger.core.DTO;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,5 +17,6 @@ namespace Messenger.core.Repoisitory
         public bool RejectTest(testimonial test);
         public List<testimonial> GetUserById(int  userId);
         public List<testimonial> Getpublishdate(testimonial testimonial);
+        public List<GetTestimonialShow> GetTestimonialShow();
     }
 }
