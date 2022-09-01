@@ -117,7 +117,7 @@ namespace Messenger.infra.Service
 
         void removeCode()
         {
-            Thread.Sleep(200000);
+            Thread.Sleep(300000);
             //Task.Delay(20000);
             if (falg)
             {
