@@ -57,7 +57,23 @@ namespace Messenger.infra.Service
         }
         public List<GetTestimonialShow> GetTestimonialShow()
         {
-            return testimonialRepository.GetTestimonialShow();
+            List<GetTestimonialShow> gt = testimonialRepository.GetTestimonialShow();
+            List<GetTestimonialShow> selected = new List<GetTestimonialShow>();
+
+            HashSet<int> rand = new HashSet<int>();
+            Random rnd = new Random();
+
+            while (rand.Count < 7)
+            {
+                rand.Add(rnd.Next(gt.Count));
+            }
+
+            foreach (var item in rand)
+            {
+                selected.Add(gt[item]);
+            }
+
+                return selected;
         }
     }
 }
