@@ -18,6 +18,7 @@ namespace Messenger.core.Service
         public bool UnBlock(Userr user);
         public string confirmEmail(string code);
         public bool activationChange(Userr user);
+        public void reSendVerificationCode(UserLogDTO userLog);
 
     }
 }
