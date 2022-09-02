@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Messenger.core.Data;
+using Messenger.core.Service;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,6 +13,24 @@ namespace MessengerAPI.Controllers
     [ApiController]
     public class ContactUsController : ControllerBase
     {
-        
+        private readonly IContactUsService contactUsService;
+        public ContactUsController(IContactUsService contactUsService)
+        {
+            this.contactUsService = contactUsService;
+        }
+        [HttpGet]
+        [Route("GetContact")]
+        public IActionResult GetContact()
+        {
+            var result = contactUsService.GetContact();
+            return Ok(result);
+        }
+        [HttpPut]
+        [Route("UpdateContact")]
+        public IActionResult UpdateContact(contactUs contact)
+        {
+            var result = contactUsService.UpdateContact(contact);
+            return Ok(result);
+        }
     }
 }

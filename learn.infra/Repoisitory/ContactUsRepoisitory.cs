@@ -79,7 +79,7 @@ namespace Messenger.infra.Repoisitory
 
             var parameter = new DynamicParameters();
             parameter.Add
-               ("@crud", "C", dbType: DbType.String, direction: ParameterDirection.Input);
+               ("@crud", "U", dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add
                 ("@CcontactUsId", contact.contactUsId, dbType: DbType.Int32, direction: ParameterDirection.Input);
             parameter.Add
