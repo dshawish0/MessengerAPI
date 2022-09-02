@@ -182,5 +182,19 @@ namespace MessengerAPI.Controllers
                 return new Userr();
             }
         }
+        [HttpPut]
+        [Route("ActivationChange")]
+        public IActionResult ActivationChange([FromBody] Userr user)
+        {
+            try
+            {
+                this.userService.activationChange(user);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
+        }
     }
 }
