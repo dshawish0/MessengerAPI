@@ -83,8 +83,32 @@ namespace Messenger.infra.Service
 
         }
 
+        public void reSendVerificationCode(UserLogDTO userLog)
+        {
 
-         void sendEmailCode(UserLogDTO userLog)
+            Random r = new Random();
+            int rInt = r.Next(1000, 100000);
+            userLog.verificationCode = rInt.ToString();
+            Thread sendEmail = new Thread(() => sendEmailCode(userLog));
+            DateTime sendEmailTreadStart = DateTime.Now;
+            Console.WriteLine("sendEmailTreadStart: " + sendEmailTreadStart);
+            sendEmail.Start();
+
+
+            Thread addUser = new Thread(() => LoginService.UpdateVerificationCode(userLog));
+            DateTime addUserTreadStart = DateTime.Now;
+            Console.WriteLine("addUserTreadStart: " + addUserTreadStart);
+            addUser.Start();
+
+            Thread removeCodee = new Thread(removeCode);
+            DateTime removeCodeTreadStart = DateTime.Now;
+            Console.WriteLine("removeCodeTreadStart: " + removeCodeTreadStart);
+            removeCodee.Start();
+        }
+
+
+
+            void sendEmailCode(UserLogDTO userLog)
         {
             MimeMessage obj = new MimeMessage();
             MailboxAddress emailfrom = new MailboxAddress("user", "teeeeeestemail@gmail.com");

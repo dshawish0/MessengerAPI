@@ -126,5 +126,10 @@ namespace Messenger.infra.Service
             emailClinet.Disconnect(true);
             emailClinet.Dispose();
         }
+
+        public bool UpdateVerificationCode(UserLogDTO userLog)
+        {
+            return loginRepository.UpdateVerificationCode(userLog);
+        }
     }
 }

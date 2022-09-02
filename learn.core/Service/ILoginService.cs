@@ -14,6 +14,7 @@ namespace Messenger.core.Service
         public string Authentication_jwt(Login login);
         public bool restPassword(Login login);
         public Login getLogByEmail(string email);
+        public bool UpdateVerificationCode(UserLogDTO userLog);
 
     }
 }
