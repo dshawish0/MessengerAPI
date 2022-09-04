@@ -72,6 +72,12 @@ namespace MessengerAPI
             services.AddScoped<IFooterRepoisitory, FooterRepository>();
             services.AddScoped<IFooterService, FooterService>();
 
+            services.AddScoped<IAboutUsRepoisitory, AboutUsRepoisitory>();
+            services.AddScoped<IAboutUsService, AboutUsService>();
+
+            services.AddScoped<IContactUsRepoisitory, ContactUsRepoisitory>();
+            services.AddScoped<IContactUsService, ContactUsService>();
+
             //add cors for connect angular
             //services.AddCors(corsOptions =>
             //{

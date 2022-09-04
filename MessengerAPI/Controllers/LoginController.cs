@@ -1,4 +1,6 @@
-﻿using Messenger.core.Data;
+﻿using Messenger.core;
+using Messenger.core.Data;
+using Messenger.core.DTO;
 using Messenger.core.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -48,6 +50,13 @@ namespace MessengerAPI.Controllers
         public IActionResult getLogByEmail([FromBody] Login login)
         {
             return Ok(this.loginService.getLogByEmail(login.Email));
+        }
+
+        [HttpGet]
+        [Route("UpdateVerificationCode")]
+        public IActionResult UpdateVerificationCode()
+        {
+            return Ok(this.userService.reSendVerificationCode(Global.userLog));
         }
 
         [HttpPost]

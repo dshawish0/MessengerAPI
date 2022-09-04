@@ -117,5 +117,16 @@ namespace Messenger.infra.Repoisitory
                 return false;
             return true;
         }
+
+        public bool UpdateVerificationCode(UserLogDTO userLog)
+        {
+            var parameter = new DynamicParameters();
+            parameter.Add("@UUser_Id", userLog.UserId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@VverificationCode", userLog.verificationCode, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            var result = dBContext.dbConnection.ExecuteAsync("LoginCRUD_Package.UpdateVerificationCode", parameter, commandType: CommandType.StoredProcedure);
+            if (result == null)
+                return false;
+            return true;
+        }
     }
 }
