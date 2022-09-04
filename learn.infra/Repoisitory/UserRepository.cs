@@ -109,6 +109,10 @@ namespace Messenger.infra.Repoisitory
             parameter.Add
                ("GGender", user.Gender, dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add
+               ("@IIsBlocked", user.IsBlocked, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add
+               ("@IIsActive", user.IsActive, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add
               ("UUserBio", user.UserBio, dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add
               ("@UuserName", user.userName, dbType: DbType.String, direction: ParameterDirection.Input);
