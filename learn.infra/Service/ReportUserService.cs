@@ -1,6 +1,7 @@
 ﻿using learn.core.Data;
 using learn.core.Repoisitory;
 using learn.core.Service;
+using Messenger.core.DTO;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -31,9 +32,9 @@ namespace learn.infra.Service
             return reportUserRepoisitory.GetReportUsers();
         }
 
-        public List<ReportUser> GetReportUsersById(int id)
+        public List<GetAllReportByUserName> GetReportUsersByName(string name)
         {
-            return reportUserRepoisitory.GetReportUsersById(id);
+            return reportUserRepoisitory.GetReportUsersByName(name);
         }
 
         public bool InsertReportUser(ReportUser report)
@@ -49,6 +50,10 @@ namespace learn.infra.Service
         public bool UpdateReportUser(ReportUser report)
         {
             return reportUserRepoisitory.UpdateReportUser(report);
+        }
+        public List<GetAllReportByUserName> GetAllByusername()
+        {
+            return reportUserRepoisitory.GetAllByusername();
         }
     }
 }

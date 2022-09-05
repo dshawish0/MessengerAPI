@@ -2,6 +2,7 @@
 using learn.core.Data;
 using learn.core.domain;
 using learn.core.Repoisitory;
+using Messenger.core.DTO;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -46,11 +47,11 @@ namespace learn.infra.Repoisitory
             return result.ToList();
         }
 
-        public List<ReportUser> GetReportUsersById(int id)
+        public List<GetAllReportByUserName> GetReportUsersByName(string name)
         {
             var parameter = new DynamicParameters();
-            parameter.Add("RReportUserId", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            IEnumerable<ReportUser> result = dBContext.dbConnection.Query<ReportUser>("ReportUserCRUD_Package.getById", parameter, commandType: CommandType.StoredProcedure);
+            parameter.Add("RUserName", name, dbType: DbType.String, direction: ParameterDirection.Input);
+            IEnumerable<GetAllReportByUserName> result = dBContext.dbConnection.Query<GetAllReportByUserName>("ReportUserCRUD_Package.GetReportUsersByName", parameter, commandType: CommandType.StoredProcedure);
 
             return result.ToList();
         }
@@ -121,6 +122,13 @@ namespace learn.infra.Repoisitory
                 return false;
             else
                 return true;
+        }
+
+        public List<GetAllReportByUserName> GetAllByusername()
+        {
+            IEnumerable<GetAllReportByUserName> result = dBContext.dbConnection.Query<GetAllReportByUserName>("ReportUserCRUD_Package.GetAllByusername", commandType: CommandType.StoredProcedure);
+
+            return result.ToList();
         }
     }
 }
