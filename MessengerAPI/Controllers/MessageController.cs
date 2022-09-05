@@ -101,7 +101,7 @@ namespace MessengerAPI.Controllers
                 //foreach (var c in file)
                 //{
                      fileName = Guid.NewGuid().ToString() + "_" + file.FileName;
-                var fullPath = Path.Combine("C:\\Users\\yazan\\OneDrive\\سطح المكتب\\New folder (2)\\MessengerAppUI\\src\\assets\\images", fileName);
+                var fullPath = Path.Combine("C:\\Users\\yazan\\OneDrive\\سطح المكتب\\New folder (2)\\MessengerAppUI\\src\\assets\\Img", fileName);
 
                     using (var stream = new FileStream(fullPath, FileMode.Create))
                     {

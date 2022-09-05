@@ -66,16 +66,18 @@ namespace learn.infra.Repoisitory
             var parameter = new DynamicParameters();
             parameter.Add("@id", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
-            var result = await dBContext.dbConnection.QueryAsync<MessageGroup, GroupMember,Message, MessageGroup>("Chat_Package.Chat", (messageGroup, groupMember, message) =>
+            var result = await dBContext.dbConnection.QueryAsync<MessageGroup, GroupMember,Message,Userr, MessageGroup>("Chat_Package.Chat", (messageGroup, groupMember, message, user) =>
             {
                 messageGroup.GroupMembers = messageGroup.GroupMembers ?? new List<GroupMember>();
                 messageGroup.GroupMembers.Add(groupMember);
                 messageGroup.Messages = messageGroup.Messages ?? new List<Message>();
                 messageGroup.Messages.Add(message);
                 messageGroup.Messages = messageGroup.Messages.Distinct().ToList();
+                messageGroup.GroupMembers.First().User = user?? new Userr();
+                messageGroup.GroupMembers.First().User = user;
                 return messageGroup;
             },
-            splitOn: "MessageGroupId,GroupMemberId,MessageId",
+            splitOn: "MessageGroupId,GroupMemberId,MessageId,userId",
             param: parameter,
             commandType: CommandType.StoredProcedure
             );
@@ -94,6 +96,7 @@ namespace learn.infra.Repoisitory
                         User_Id = groupMember.User_Id,
                         User = groupMember.User
                     }).Distinct().ToList();
+                    messageGroup.GroupMembers = messageGroup.GroupMembers.GroupBy(x => x.GroupMemberId).Select(y => y.First()).ToList();
                     if (messageGroup.Messages.First() !=null)
                     {
                         messageGroup.Messages = o.Distinct().Select(t => t.Messages.Single()).Select(message => new Message

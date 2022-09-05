@@ -113,7 +113,7 @@ namespace MessengerAPI.Controllers
             {
                 var file = Request.Form.Files[0];
                 var fileName = Guid.NewGuid().ToString() + "_" + file.FileName;
-                var fullPath = Path.Combine("C:\\Users\\yazan\\OneDrive\\سطح المكتب\\New folder (2)\\MessengerAppUI\\src\\assets\\images", fileName);
+                var fullPath = Path.Combine("C:\\Users\\yazan\\OneDrive\\سطح المكتب\\New folder (2)\\MessengerAppUI\\src\\assets\\Img", fileName);
 
                 using (var stream = new FileStream(fullPath, FileMode.Create))
                 {
@@ -180,6 +180,20 @@ namespace MessengerAPI.Controllers
             catch (Exception e)
             {
                 return new Userr();
+            }
+        }
+        [HttpPut]
+        [Route("ActivationChange")]
+        public IActionResult ActivationChange([FromBody] Userr user)
+        {
+            try
+            {
+                this.userService.activationChange(user);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
             }
         }
     }
