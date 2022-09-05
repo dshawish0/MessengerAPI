@@ -56,6 +56,7 @@ namespace MessengerAPI.Controllers
         [Route("UpdateVerificationCode")]
         public IActionResult UpdateVerificationCode()
         {
+
             return Ok(this.userService.reSendVerificationCode(Global.userLog));
         }
 
