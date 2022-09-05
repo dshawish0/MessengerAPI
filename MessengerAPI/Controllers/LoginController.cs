@@ -68,5 +68,13 @@ namespace MessengerAPI.Controllers
             result.IsActive = 0;
             return Ok(this.userService.activationChange(result));
         }
+
+        [HttpPost]
+        [Route("ChangeCurrentPassword")]
+        public IActionResult ChangeCurrentPassword([FromBody] UserChangeCurrPass userChangeCurrPass)
+        {
+            
+            return Ok(this.loginService.ChangeCurrentPassword(userChangeCurrPass));
+        }
     }
 }
