@@ -68,5 +68,24 @@ namespace MessengerAPI.Controllers
                 return NotFound(e.Message);
             }
         }
+
+        [HttpPost]
+        [Route("InsertListOfGroupMember")]
+        public IActionResult InsertListOfGroupMember([FromBody]List<GroupMember> groupMember)
+        {
+            try
+            {
+                foreach (var item in groupMember)
+                {
+                    groupMemberService.InsertGroupMember(item);
+                }
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
+            
+        }
     }
 }

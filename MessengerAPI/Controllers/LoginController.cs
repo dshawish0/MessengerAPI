@@ -52,12 +52,12 @@ namespace MessengerAPI.Controllers
             return Ok(this.loginService.getLogByEmail(login.Email));
         }
 
-        [HttpGet]
-        [Route("UpdateVerificationCode")]
-        public IActionResult UpdateVerificationCode()
-        {
-            return Ok(this.userService.reSendVerificationCode(Global.userLog));
-        }
+        //[HttpGet]
+        //[Route("UpdateVerificationCode")]
+        //public IActionResult UpdateVerificationCode()
+        //{
+        //    return Ok(this.userService.reSendVerificationCode(Global.userLog));
+        //}
 
         [HttpPost]
         [Route("logOut/{userId}")]
