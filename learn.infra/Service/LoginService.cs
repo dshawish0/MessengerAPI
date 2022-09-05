@@ -131,5 +131,10 @@ namespace Messenger.infra.Service
         {
             return loginRepository.UpdateVerificationCode(userLog);
         }
+
+        public bool ChangeCurrentPassword(UserChangeCurrPass userChangeCurrPass)
+        {
+            return loginRepository.ChangeCurrentPassword(userChangeCurrPass);
+        }
     }
 }
