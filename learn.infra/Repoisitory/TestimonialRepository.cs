@@ -130,18 +130,24 @@ namespace Messenger.infra.Repoisitory
             IEnumerable<testimonial> result = dBContext.dbConnection.Query<testimonial>("testimonialCRUD_Package.GetUserById", parameter, commandType: CommandType.StoredProcedure);
             return result.ToList();
         }
-        public List<testimonial> Getpublishdate(testimonial testimonial)
+        public List<GetTestimonialByUserName> Getpublishdate(GetTestimonialByUserName testimonial)
         {
             var parameter = new DynamicParameters();
-            parameter.Add("@Tpublishdate", testimonial.publishDate.Date, dbType: DbType.Date, direction: ParameterDirection.Input);
-            IEnumerable<testimonial> result = dBContext.dbConnection.Query<testimonial>("testimonialCRUD_Package.Getpublishdate", parameter, commandType: CommandType.StoredProcedure);
+            parameter.Add("@Tpublishdate", testimonial.publishDate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
+            IEnumerable<GetTestimonialByUserName> result = dBContext.dbConnection.Query<GetTestimonialByUserName>("testimonialCRUD_Package.Getpublishdate", parameter, commandType: CommandType.StoredProcedure);
             return result.ToList();
         }
         public List<GetTestimonialShow> GetTestimonialShow()
         {
-            var parameter = new DynamicParameters();
             IEnumerable<GetTestimonialShow> result = dBContext.dbConnection.Query<GetTestimonialShow>
                 ("testimonialCRUD_Package.GetTestimonialShow", commandType: CommandType.StoredProcedure);
+            return result.ToList();
+        }
+        public List<GetTestimonialByUserName> GetTestimonialByUserName()
+        {
+            var parameter = new DynamicParameters();
+            IEnumerable<GetTestimonialByUserName> result = dBContext.dbConnection.Query<GetTestimonialByUserName>
+                ("testimonialCRUD_Package.GetTestimonialByUserName", commandType: CommandType.StoredProcedure);
             return result.ToList();
         }
     }

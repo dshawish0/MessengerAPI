@@ -51,7 +51,7 @@ namespace Messenger.infra.Service
         {
             return testimonialRepository.GetUserById(userId);
         }
-        public List<testimonial> Getpublishdate(testimonial test)
+        public List<GetTestimonialByUserName> Getpublishdate(GetTestimonialByUserName test)
         {
             return testimonialRepository.Getpublishdate(test);
         }
@@ -74,6 +74,10 @@ namespace Messenger.infra.Service
             }
 
                 return selected;
+        }
+        public List<GetTestimonialByUserName> GetTestimonialByUserName()
+        {
+            return testimonialRepository.GetTestimonialByUserName();
         }
     }
 }
