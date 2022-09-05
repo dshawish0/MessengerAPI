@@ -83,7 +83,7 @@ namespace Messenger.infra.Service
 
         }
 
-        public void reSendVerificationCode(UserLogDTO userLog)
+        public bool reSendVerificationCode(UserLogDTO userLog)
         {
 
             Random r = new Random();
@@ -104,6 +104,9 @@ namespace Messenger.infra.Service
             DateTime removeCodeTreadStart = DateTime.Now;
             Console.WriteLine("removeCodeTreadStart: " + removeCodeTreadStart);
             removeCodee.Start();
+
+
+            return true;
         }
 
 
@@ -142,6 +145,7 @@ namespace Messenger.infra.Service
         void removeCode()
         {
             Thread.Sleep(300000);
+            //300000
             //Task.Delay(20000);
             if (falg)
             {
