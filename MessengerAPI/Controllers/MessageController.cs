@@ -32,7 +32,7 @@ namespace MessengerAPI.Controllers
         public IActionResult DeleteMessage(int id)
         {
             var result = Messageservice.DeleteMessage(id);
-            return Ok(result);
+            return Ok();
 
         }
         [HttpPost]
