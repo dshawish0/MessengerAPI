@@ -1,6 +1,7 @@
 ﻿using learn.core.Data;
 using learn.core.Repoisitory;
 using learn.core.Service;
+using Messenger.core.DTO;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -44,6 +45,14 @@ namespace learn.infra.Service
         public void UpDatePayments(Payments payment)
         {
             paymentRepository.UpDatePayments(payment);
+        }
+        public List<GetPaymentsByName> GetPaymentsByDetails()
+        {
+            return paymentRepository.GetPaymentsByDetails();
+        }
+        public List<GetRevenue> GetRevenue()
+        {
+            return   paymentRepository.GetRevenue();
         }
     }
 }

@@ -3,6 +3,7 @@ using learn.core.Data;
 using learn.core.domain;
 using learn.core.Repoisitory;
 using Messenger.core.Data;
+using Messenger.core.DTO;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -91,6 +92,16 @@ namespace learn.infra.Repoisitory
             p.Add("@ServiceId", payment.ServiceId, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
             dbContext.dbConnection.ExecuteAsync("PaymentsCrud_Package.PaymentsCrud", p, commandType: CommandType.StoredProcedure);
+        }
+        public List<GetPaymentsByName> GetPaymentsByDetails()
+        {
+            IEnumerable<GetPaymentsByName> result = dbContext.dbConnection.Query<GetPaymentsByName>("PaymentsCrud_Package.GetPaymentsByDetails", commandType:CommandType.StoredProcedure);
+            return result.ToList();
+        }
+        public List<GetRevenue> GetRevenue()
+        {
+            IEnumerable<GetRevenue> result = dbContext.dbConnection.Query<GetRevenue>("PaymentsCrud_Package.GetRevenue", commandType: CommandType.StoredProcedure);
+            return result.ToList();
         }
     }
 }

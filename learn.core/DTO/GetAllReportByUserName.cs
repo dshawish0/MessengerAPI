@@ -12,6 +12,7 @@ namespace Messenger.core.DTO
         public string ReportText { get; set; }
         public int Status { get; set; }
         public DateTime ReportDate { get; set; }
+        public int User_Id { get; set; }
         public string  UserName { get; set; }
     
     }
