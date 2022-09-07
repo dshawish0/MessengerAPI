@@ -82,7 +82,7 @@ namespace learn.infra.Repoisitory
             commandType: CommandType.StoredProcedure
             );
 
-            var value = result.Distinct().AsList<MessageGroup>().OrderBy(x => x.MessageGroupId)
+            var value = result.Distinct().AsList<MessageGroup>()
                 .GroupBy(x => x.MessageGroupId)
                 .Select(o =>
                 {
@@ -114,6 +114,9 @@ namespace learn.infra.Repoisitory
                     return messageGroup;
                 }).ToList();
             var distinctItems = value.Select(x=>x.Messages.GroupBy(x => x.MessageId).Select(y => y.First()));
+            var ord = value.ToList();
+
+
             return value.ToList();
         }
 
