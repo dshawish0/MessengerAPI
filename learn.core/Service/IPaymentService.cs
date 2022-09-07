@@ -1,4 +1,5 @@
 ﻿using learn.core.Data;
+using Messenger.core.DTO;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,5 +15,7 @@ namespace learn.core.Service
         public void UpDatePayments(Payments payment);
         public Payments GetPaymentsById(int id);
         public Task<IList<Payments>> GetPaymentsByUserId(int userId);
+        public List<GetPaymentsByName> GetPaymentsByDetails();
+        public List<GetRevenue> GetRevenue();
     }
 }

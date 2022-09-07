@@ -102,5 +102,21 @@ namespace MessengerAPI.Controllers
                 return NotFound(e.Message);
             }
         }
+
+        [HttpGet]
+        [Route("GetPaymentsByDetails")]
+        public IActionResult GetPaymentsByDetails()
+        {
+            var result =  paymentService.GetPaymentsByDetails();
+            return Ok(result);
+        }
+        [HttpGet]
+        [Route("GetRevenue")]
+        public IActionResult GetRevenue()
+        {
+            var result =  paymentService.GetRevenue();
+            return Ok(result);
+             
+        }
     }
 }
