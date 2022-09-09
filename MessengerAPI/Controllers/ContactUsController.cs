@@ -32,5 +32,12 @@ namespace MessengerAPI.Controllers
             var result = contactUsService.UpdateContact(contact);
             return Ok(result);
         }
+        [HttpPost]
+        [Route("InsertContact")]
+        public IActionResult InsertContact(contactUs contact)
+        {
+            var result = contactUsService.InsertContact(contact);
+            return Ok(result);
+        }
     }
 }

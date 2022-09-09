@@ -103,5 +103,10 @@ namespace learn.infra.Repoisitory
             IEnumerable<GetRevenue> result = dbContext.dbConnection.Query<GetRevenue>("PaymentsCrud_Package.GetRevenue", commandType: CommandType.StoredProcedure);
             return result.ToList();
         }
+        public List<GetRevenueByMonth> GetRevenueByMonth()
+        {
+            IEnumerable<GetRevenueByMonth> result = dbContext.dbConnection.Query<GetRevenueByMonth>("PaymentsCrud_Package.GetRevenueByMonth", commandType: CommandType.StoredProcedure);
+            return result.ToList();
+        }
     }
 }
