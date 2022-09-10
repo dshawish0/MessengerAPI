@@ -17,5 +17,6 @@ namespace learn.core.Service
         public Task<IList<Payments>> GetPaymentsByUserId(int userId);
         public List<GetPaymentsByName> GetPaymentsByDetails();
         public List<GetRevenue> GetRevenue();
+        public List<GetRevenueByMonth> GetRevenueByMonth();
     }
 }

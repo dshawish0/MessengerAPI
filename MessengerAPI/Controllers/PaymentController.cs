@@ -116,7 +116,13 @@ namespace MessengerAPI.Controllers
         {
             var result =  paymentService.GetRevenue();
             return Ok(result);
-             
+        }
+        [HttpGet]
+        [Route("GetRevenueByMonth")]
+        public IActionResult GetRevenueByMonth()
+        {
+            var result = paymentService.GetRevenueByMonth();
+            return Ok(result);
         }
     }
 }
