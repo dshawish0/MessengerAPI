@@ -64,7 +64,7 @@ namespace MessengerAPI.Controllers
         }
         [HttpPost]
         [Route("Getpublishdate")]
-        public IActionResult Getpublishdate(testimonial test)
+        public IActionResult Getpublishdate(GetTestimonialByUserName test)
         {
             return Ok(TestimonialService.Getpublishdate(test));
         }
@@ -74,6 +74,11 @@ namespace MessengerAPI.Controllers
         {
             return Ok(TestimonialService.GetTestimonialShow());
         }
-
+        [HttpGet]
+        [Route("GetTestimonialByUserName")]
+        public IActionResult  GetTestimonialByUserName()
+        {
+            return Ok(TestimonialService.GetTestimonialByUserName());
+        }
     }
 }

@@ -16,7 +16,8 @@ namespace Messenger.core.Service
         public bool AcceptTest(testimonial test);
         public bool RejectTest(testimonial test);
         public List<testimonial> GetUserById(int userId);
-        public List<testimonial> Getpublishdate(testimonial testimonial);
+        public List<GetTestimonialByUserName> Getpublishdate(GetTestimonialByUserName testimonial);
         public List<GetTestimonialShow> GetTestimonialShow();
+        public List<GetTestimonialByUserName> GetTestimonialByUserName();
     }
 }

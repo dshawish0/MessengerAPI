@@ -1,4 +1,5 @@
 ﻿using learn.core.Data;
+using Messenger.core.DTO;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,5 +16,8 @@ namespace learn.core.Repoisitory
         public Payments GetPaymentsById(int id);
 
         public Task<IList<Payments>> GetPaymentsByUserId(int userId);
+        public List<GetPaymentsByName> GetPaymentsByDetails();
+        public List<GetRevenue> GetRevenue();
+        public List<GetRevenueByMonth> GetRevenueByMonth();
     }
 }

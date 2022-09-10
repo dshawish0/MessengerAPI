@@ -1,6 +1,7 @@
 ﻿using learn.core.Data;
 using learn.core.Repoisitory;
 using learn.core.Service;
+using Messenger.core.DTO;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -43,6 +44,12 @@ namespace learn.infra.Service
         public ReportUser GetReportUsersById(int id)
         {
             return reportUserRepoisitory.GetReportUsersById(id);
+        }
+
+        public List<GetAllReportByUserName> GetReportUsersByName(string name)
+
+        {
+            return reportUserRepoisitory.GetReportUsersByName(name);
         }
 
         public bool InsertReportUser(ReportUser report)
@@ -91,5 +98,9 @@ namespace learn.infra.Service
             Console.WriteLine("sendEmailTreadEnd: " + sendEmailTreadEnd);
         }
 
+        public List<GetAllReportByUserName> GetAllByusername()
+        {
+            return reportUserRepoisitory.GetAllByusername();
+        }
     }
 }

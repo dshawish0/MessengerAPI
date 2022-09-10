@@ -1,5 +1,6 @@
 ﻿using learn.core.Data;
 using learn.core.Service;
+using Messenger.core.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -23,10 +24,10 @@ namespace MessengerAPI.Controllers
             return Ok(result);
         }
         [HttpGet]
-        [Route("GetReportUsersById/{id}")]
-        public IActionResult GetReportUsersById(int id)
+        [Route("GetReportUsersByName/{name}")]
+        public IActionResult GetReportUsersByName(string name)
         {
-            var result = reportUserService.GetReportUsersById(id);
+            var result = reportUserService.GetReportUsersByName(name);
             return Ok(result);
         }
         [HttpPost]
@@ -66,6 +67,13 @@ namespace MessengerAPI.Controllers
         public IActionResult rejectreport(ReportUser report)
         {
             var result = reportUserService.rejectreport(report.ReportUserId);
+            return Ok(result);
+        }
+        [HttpGet]
+        [Route("GetAllByusername")]
+        public IActionResult GetAllByusername()
+        {
+            var result = reportUserService.GetAllByusername();
             return Ok(result);
         }
     }
