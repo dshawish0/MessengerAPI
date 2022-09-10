@@ -54,5 +54,9 @@ namespace learn.infra.Service
         {
             return   paymentRepository.GetRevenue();
         }
+        public List<GetRevenueByMonth> GetRevenueByMonth()
+        {
+            return paymentRepository.GetRevenueByMonth();
+        }
     }
 }
