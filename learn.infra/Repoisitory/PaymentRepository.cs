@@ -24,8 +24,7 @@ namespace learn.infra.Repoisitory
         {
             var p = new DynamicParameters();
             p.Add("@crud", "C", dbType: DbType.String, direction: ParameterDirection.Input);
-            p.Add("@id", payment.Paymentid, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            p.Add("@PDate", payment.Paymentdate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
+            p.Add("@PDate", DateTime.Now, dbType: DbType.DateTime, direction: ParameterDirection.Input);
             p.Add("@UserId", payment.UserId, dbType: DbType.Int32, direction: ParameterDirection.Input);
             p.Add("@ServiceId", payment.ServiceId, dbType: DbType.Int32, direction: ParameterDirection.Input);
 

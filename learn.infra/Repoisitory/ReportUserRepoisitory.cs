@@ -46,13 +46,13 @@ namespace learn.infra.Repoisitory
             return result.ToList();
         }
 
-        public List<ReportUser> GetReportUsersById(int id)
+        public ReportUser GetReportUsersById(int id)
         {
             var parameter = new DynamicParameters();
             parameter.Add("RReportUserId", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
             IEnumerable<ReportUser> result = dBContext.dbConnection.Query<ReportUser>("ReportUserCRUD_Package.getById", parameter, commandType: CommandType.StoredProcedure);
 
-            return result.ToList();
+            return result.FirstOrDefault();
         }
 
         public bool InsertReportUser(ReportUser report)
