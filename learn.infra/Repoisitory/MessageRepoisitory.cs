@@ -20,14 +20,15 @@ namespace learn.infra.Repoisitory
         {
             this.dBContext = dBContext;
         }
-        public string CreateMessage(Message ins)
+        public string CreateMessage(Message message)
         {
             var parameter = new DynamicParameters();
-            parameter.Add("crud", "C", dbType: DbType.String, direction: ParameterDirection.Input);
-            parameter.Add("SSenderId", ins.SenderId, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            parameter.Add("TText ", ins.Text, dbType: DbType.String, direction: ParameterDirection.Input);
-            parameter.Add("MMessageDate ", ins.MessageDate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
-            parameter.Add("MMessageGroupId ", ins.MessageGroupId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@crud", "C", dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@SSenderId", message.SenderId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@TText ", message.Text, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@MMessageDate ", message.MessageDate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
+            parameter.Add("@MMessageGroupId ", message.MessageGroupId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@MMESSAGETYPE ", message.MessageType, dbType: DbType.String, direction: ParameterDirection.Input);
 
             var result = dBContext.dbConnection.ExecuteAsync("MessageCRUD_Package.MessageCRUD", parameter, commandType: CommandType.StoredProcedure);
 
@@ -100,15 +101,16 @@ namespace learn.infra.Repoisitory
             return result.FirstOrDefault();
         }
 
-        public string UpDateMessage(Message upd)
+        public string UpDateMessage(Message message)
         {
             var parameter = new DynamicParameters();
-            parameter.Add("crud", "U", dbType: DbType.String, direction: ParameterDirection.Input);
-            parameter.Add("MMessageId", upd.MessageId, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            parameter.Add("SSenderId", upd.SenderId, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            parameter.Add("TText ", upd.Text, dbType: DbType.String, direction: ParameterDirection.Input);
-            parameter.Add("MMessageDate ", upd.MessageDate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
-            parameter.Add("MMessageGroupId ", upd.MessageGroupId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@crud", "U", dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@MMessageId", message.MessageId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@SSenderId", message.SenderId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@TText ", message.Text, dbType: DbType.String, direction: ParameterDirection.Input);
+            parameter.Add("@MMessageDate ", message.MessageDate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
+            parameter.Add("@MMessageGroupId ", message.MessageGroupId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            parameter.Add("@MMESSAGETYPE ", message.MessageType, dbType: DbType.String, direction: ParameterDirection.Input);
 
             var result = dBContext.dbConnection.ExecuteAsync("MessageCRUD_Package.MessageCRUD", parameter, commandType: CommandType.StoredProcedure);
 

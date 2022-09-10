@@ -8,9 +8,9 @@ namespace MessengerAPI
 {
     public class Chat :Hub
     {
-        public void NewMessage(string userName, string message)
+        public void NewMessage(string userName, string message, string messageType)
         {
-            Clients.All.SendAsync("newMessage",userName,message);
+            Clients.All.SendAsync("newMessage",userName,message, messageType);
         }
     }
 }
