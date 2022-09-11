@@ -80,5 +80,13 @@ namespace MessengerAPI.Controllers
         {
             return Ok(TestimonialService.GetTestimonialByUserName());
         }
+
+
+
+        [HttpPost]
+        public IActionResult InsertTest([FromBody] testimonial test)
+        {
+            return Ok(TestimonialService.InsertTest(test));
+        }
     }
 }
