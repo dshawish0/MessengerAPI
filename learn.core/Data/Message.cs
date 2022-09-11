@@ -13,7 +13,7 @@ namespace learn.core.Data
         public string Text { get; set; }
         public DateTime MessageDate { get; set; }
         public int MessageGroupId { get; set; }
-
+        public string MessageType { get; set; }
         [ForeignKey("MessageGroupId")]
         public virtual MessageGroup MessageGroup { get; set; }
 

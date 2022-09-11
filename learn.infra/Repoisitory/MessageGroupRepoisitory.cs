@@ -106,6 +106,7 @@ namespace learn.infra.Repoisitory
                             MessageDate = message.MessageDate,
                             Text = message.Text,
                             SenderId = message.SenderId,
+                            MessageType = message.MessageType,
 
                         }).Distinct().ToList();
                         messageGroup.Messages = messageGroup.Messages.GroupBy(x => x.MessageId).Select(y => y.First()).ToList();
