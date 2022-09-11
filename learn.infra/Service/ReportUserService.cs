@@ -46,7 +46,7 @@ namespace learn.infra.Service
             return reportUserRepoisitory.GetReportUsersById(id);
         }
 
-        public List<GetAllReportByUserName> GetReportUsersByName(string name)
+        public GetAllReportByUserName GetReportUsersByName(string name)
 
         {
             return reportUserRepoisitory.GetReportUsersByName(name);

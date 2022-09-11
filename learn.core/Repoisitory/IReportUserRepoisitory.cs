@@ -13,7 +13,7 @@ namespace learn.core.Repoisitory
         public bool UpdateReportUser(ReportUser report);
         public bool DeleteReportUser(int id);
         public ReportUser GetReportUsersById(int id);
-        public List<GetAllReportByUserName> GetReportUsersByName(string name);
+        public GetAllReportByUserName GetReportUsersByName(string name);
         public bool acceptingReportUser(int id);
         public bool rejectreport(int id);
         public List<GetAllReportByUserName> GetAllByusername();
