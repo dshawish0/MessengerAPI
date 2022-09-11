@@ -34,6 +34,8 @@ namespace Messenger.infra.Service
                 return null;
 
             var tokenHandeler = new JwtSecurityTokenHandler();
+            var restlt = UserRepository.GetUserById(result.User_Id);
+            var res = loginRepository.getLogByEmail(result.Email);
             var tokenKey = Encoding.ASCII.GetBytes("[SECRET Used To Sign And Verify Jwt Tolen,It can be any string]");
             var tokenDescirptor = new SecurityTokenDescriptor
             {
@@ -43,7 +45,9 @@ namespace Messenger.infra.Service
                          new Claim(ClaimTypes.Email, result.Email),
                          new Claim(ClaimTypes.Role, result.roleName),
                          new Claim(ClaimTypes.Name, result.userName),
-                         new Claim(ClaimTypes.NameIdentifier,result.User_Id.ToString())
+                         new Claim(ClaimTypes.NameIdentifier,result.User_Id.ToString()),
+                         new Claim(ClaimTypes.GivenName, NullToString(res.verificationCode)),
+                         new Claim(ClaimTypes.Surname, restlt.IsBlocked.ToString())
                      }
                     ),
                 Expires = DateTime.UtcNow.AddHours(1),
@@ -52,11 +56,15 @@ namespace Messenger.infra.Service
             var generateToken = tokenHandeler.CreateToken(tokenDescirptor);
 
 
-            var restlt=UserRepository.GetUserById(result.User_Id);
+            
             restlt.IsActive = 1;
             UserRepository.activationChange(restlt);
-
-
+            UserLogDTO userLog = new UserLogDTO();
+            userLog.UserId= restlt.UserId;
+            userLog.userName = result.userName;
+            userLog.Email = result.Email;
+            userLog.Password = login.Password;
+            Global.userLog = userLog;
             return tokenHandeler.WriteToken(generateToken);
         }
 
@@ -95,7 +103,7 @@ namespace Messenger.infra.Service
 
             if (log == null)
                 return null;
-            sendEmailCode(log);
+            //sendEmailCode(log);
             return log;
         }
 
@@ -132,9 +140,22 @@ namespace Messenger.infra.Service
             return loginRepository.UpdateVerificationCode(userLog);
         }
 
-        public bool ChangeCurrentPassword(UserChangeCurrPass userChangeCurrPass)
+        public string ChangeCurrentPassword(UserChangeCurrPass userChangeCurrPass)
         {
-            return loginRepository.ChangeCurrentPassword(userChangeCurrPass);
+            var resalt= this.loginRepository.getById(userChangeCurrPass.userId);
+            if (resalt.Password.Equals(userChangeCurrPass.oldPassword))
+            {
+                loginRepository.ChangeCurrentPassword(userChangeCurrPass);
+                return "true";
+            }
+            return "false";
+        }
+
+        public static string NullToString(Object Obj)
+        {
+            if (Obj == null)
+                return "null";
+            return Obj.ToString();
         }
     }
 }

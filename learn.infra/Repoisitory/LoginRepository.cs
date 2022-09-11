@@ -35,16 +35,16 @@ namespace Messenger.infra.Repoisitory
             return result.FirstOrDefault();
         }
 
-        public bool ChangeCurrentPassword(UserChangeCurrPass userChangeCurrPass)
+        public string ChangeCurrentPassword(UserChangeCurrPass userChangeCurrPass)
         {
             var parameter = new DynamicParameters();
             parameter.Add("@userId", userChangeCurrPass.userId, dbType: DbType.Int32, direction: ParameterDirection.Input);
             parameter.Add("@PPassword", userChangeCurrPass.oldPassword, dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add("@NewPassword", userChangeCurrPass.NewPassword, dbType: DbType.String, direction: ParameterDirection.Input);
-            var result = dBContext.dbConnection.Execute("LoginCRUD_Package.ChangeCurrentPassword", parameter, commandType: CommandType.StoredProcedure);
-            if (result == 0)
-                return false;
-            return true;
+            var result = dBContext.dbConnection.ExecuteAsync("LoginCRUD_Package.ChangeCurrentPassword", parameter, commandType: CommandType.StoredProcedure);
+            if (result == null)
+                return "false";
+            return "ture";
         }
 
         public List<Login> GetAllLog()

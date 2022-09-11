@@ -16,6 +16,6 @@ namespace Messenger.core.Repoisitory
         public Login getById(int UserId);
         public Login getLogByEmail(string email);
         public bool UpdateVerificationCode(UserLogDTO userLog);
-        public bool ChangeCurrentPassword(UserChangeCurrPass userChangeCurrPass);
+        public string ChangeCurrentPassword(UserChangeCurrPass userChangeCurrPass);
     }
 }
