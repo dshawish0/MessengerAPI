@@ -57,7 +57,7 @@ namespace learn.infra.Repoisitory
             return result.FirstOrDefault();
         }
 
-        public List<GetAllReportByUserName> GetReportUsersByName(string name)
+        public GetAllReportByUserName GetReportUsersByName(string name)
         {
             var parameter = new DynamicParameters();
             parameter.Add("RUserName", name, dbType: DbType.String, direction: ParameterDirection.Input);

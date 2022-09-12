@@ -65,7 +65,7 @@ namespace Messenger.infra.Repoisitory
             parameter.Add
                ("@Sstatus", test.status, dbType: DbType.Int32, direction: ParameterDirection.Input);
             parameter.Add
-                ("@PpublishDate", test.publishDate, dbType: DbType.Date, direction: ParameterDirection.Input);
+                ("@PpublishDate",DateTime.Now, dbType: DbType.Date, direction: ParameterDirection.Input);
             parameter.Add
                ("@UuserId", test.userId, dbType: DbType.Int32, direction: ParameterDirection.Input);
 
