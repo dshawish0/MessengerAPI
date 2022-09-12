@@ -4,9 +4,11 @@ using Messenger.core.Data;
 using Messenger.core.DTO;
 using Messenger.core.Repoisitory;
 using Messenger.core.Service;
+using Microsoft.AspNetCore.Hosting;
 using MimeKit;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Security.Permissions;
 using System.Text;
@@ -19,11 +21,13 @@ namespace Messenger.infra.Service
     {
         private readonly IUserRepository UserRepository;
         private readonly ILoginService LoginService;
+        private readonly IWebHostEnvironment webHostEnvironmet;
         private static bool falg = true;
 
-        public UserService(IUserRepository UserRepository, ILoginService LoginService)
+        public UserService(IUserRepository UserRepository, ILoginService LoginService, IWebHostEnvironment webHostEnvironmet)
         {
             this.UserRepository = UserRepository;
+            this.webHostEnvironmet = webHostEnvironmet;
             this.LoginService = LoginService;
         }
 
@@ -124,7 +128,8 @@ namespace Messenger.infra.Service
             //onclick="window.location.href='https://w3docs.com';">
             //bb.HtmlBody = "<html>" + "<button window.location.href="+"'"+"https://localhost:44353/api/Authen/verificationCode/" + api_LoginAuth.verificationCode+"';"+">"+ 
             //    "verificationCode" + "</button>" + "</html>";
-            bb.HtmlBody = "<html>" + "<h1>" + userLog.verificationCode + "</h1>" + "</html>";
+            //bb.HtmlBody = "<html>" + "<h1>" + userLog.verificationCode + "</h1>" + "</html>";
+            bb.HtmlBody = Email(userLog.verificationCode);
 
             //< a href = 'http://www.example.com' ></ a > "
             ///bb.HtmlBody = "<html>" + "<a href = " + "https://localhost:44318/api/user/ConfirmEmail/" + userLog.verificationCode + ">" + "</a>" + "</html>";
@@ -198,6 +203,24 @@ namespace Messenger.infra.Service
         public bool activationChange(Userr user)
         {
             return UserRepository.activationChange(user);
+        }
+
+
+        public string Email(string code)
+        {
+            var pathToFile = "C:\\Users\\LEGION\\source\\repos\\MessengerAPI\\MessengerAPI\\EmailView\\Email\\EEmail.html";
+
+
+            var subject = "Confirm Account Registration";
+            string HtmlBody = "";
+            using(StreamReader streamReader= System.IO.File.OpenText(pathToFile))
+            {
+                HtmlBody = streamReader.ReadToEnd();
+            }
+
+            string massageBody = string.Format(HtmlBody,string.Format(code));
+
+            return massageBody;
         }
     }
 }
