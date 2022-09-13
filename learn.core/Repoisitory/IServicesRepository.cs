@@ -14,5 +14,6 @@ namespace learn.core.Repoisitory
         public void DeleteServices(int id);
         public void UpDateServices(Services services);
         public Services GetServiceById(int id);
+        public Services getByServicesName(string names );
     }
 }

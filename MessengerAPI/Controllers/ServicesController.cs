@@ -89,5 +89,19 @@ namespace MessengerAPI.Controllers
                 return NotFound(e.Message);
             }
         }
+        [HttpGet]
+        [Route("getByServicesName/{names}")]
+        public IActionResult getByServicesName(string names)
+        {
+            try
+            {
+                var result = servicesService.getByServicesName(names);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
+        }
     }
 }

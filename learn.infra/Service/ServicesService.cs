@@ -40,5 +40,9 @@ namespace learn.infra.Service
         {
             servicesRepository.UpDateServices(services);
         }
+        public Services getByServicesName(string names)
+        {
+            return servicesRepository.getByServicesName(names);
+        }
     }
 }

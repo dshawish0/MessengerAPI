@@ -71,5 +71,13 @@ namespace learn.infra.Repoisitory
 
             dbContext.dbConnection.ExecuteAsync("ServicesCrud_Package.ServicesCrud", p, commandType: CommandType.StoredProcedure);
         }
+        public Services getByServicesName(string names)
+        {
+            var p = new DynamicParameters();
+            p.Add("@SServicesName", names, dbType: DbType.String, direction: ParameterDirection.Input);
+
+            IEnumerable<Services> result = dbContext.dbConnection.Query<Services>("ServicesCrud_Package.getByServicesName", p, commandType: System.Data.CommandType.StoredProcedure);
+            return result.FirstOrDefault();
+        }
     }
 }
