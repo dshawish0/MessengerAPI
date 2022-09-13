@@ -137,7 +137,7 @@ namespace Messenger.infra.Service
 
             SmtpClient emailClinet = new SmtpClient();
             emailClinet.Connect("smtp.gmail.com", 465, true);
-            emailClinet.Authenticate("********", "********"); 
+            emailClinet.Authenticate("*******", "********"); 
             emailClinet.Send(obj);
 
             emailClinet.Disconnect(true);
@@ -218,7 +218,7 @@ namespace Messenger.infra.Service
                 HtmlBody = streamReader.ReadToEnd();
             }
 
-            string massageBody = string.Format(HtmlBody,string.Format(code));
+            string massageBody = string.Format(HtmlBody,string.Format(code), "https://themes.pixelstrap.com/chitchat/assets/images/start-up.png");
 
             return massageBody;
         }

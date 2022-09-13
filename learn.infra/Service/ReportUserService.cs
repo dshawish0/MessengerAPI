@@ -9,6 +9,7 @@ using MailKit.Net.Smtp;
 using MimeKit;
 using Messenger.core.Repoisitory;
 using Messenger.core.Data;
+using System.IO;
 
 namespace learn.infra.Service
 {
@@ -75,12 +76,13 @@ namespace learn.infra.Service
 
             obj.From.Add(emailfrom);
             obj.To.Add(emailto);
-            obj.Subject = "verificationCode";
+            obj.Subject = "You Are Reported";
             BodyBuilder bb = new BodyBuilder();
             //onclick="window.location.href='https://w3docs.com';">
             //bb.HtmlBody = "<html>" + "<button window.location.href="+"'"+"https://localhost:44353/api/Authen/verificationCode/" + api_LoginAuth.verificationCode+"';"+">"+ 
             //    "verificationCode" + "</button>" + "</html>";
-            bb.HtmlBody = "<html>" + "<h1>" + "Our users reporeted you please read chatting rolse again and be carful" + "</h1>" + "</html>";
+            //bb.HtmlBody = "<html>" + "<h1>" + "Our users reporeted you please read chatting rolse again and be carful" + "</h1>" + "</html>";
+            bb.HtmlBody = Email();
 
             //< a href = 'http://www.example.com' ></ a > "
             ///bb.HtmlBody = "<html>" + "<a href = " + "https://localhost:44318/api/user/ConfirmEmail/" + userLog.verificationCode + ">" + "</a>" + "</html>";
@@ -88,7 +90,7 @@ namespace learn.infra.Service
 
             SmtpClient emailClinet = new SmtpClient();
             emailClinet.Connect("smtp.gmail.com", 465, true);
-            emailClinet.Authenticate("******", "********");
+            emailClinet.Authenticate("********", "********");
             emailClinet.Send(obj);
 
             emailClinet.Disconnect(true);
@@ -96,6 +98,22 @@ namespace learn.infra.Service
 
             DateTime sendEmailTreadEnd = DateTime.Now;
             Console.WriteLine("sendEmailTreadEnd: " + sendEmailTreadEnd);
+        }
+
+        public string Email()
+        {
+            var pathToFile = "C:\\Users\\LEGION\\source\\repos\\MessengerAPI\\MessengerAPI\\EmailView\\Email\\EEmail.html";
+
+
+            string HtmlBody = "";
+            using (StreamReader streamReader = System.IO.File.OpenText(pathToFile))
+            {
+                HtmlBody = streamReader.ReadToEnd();
+            }
+
+            string massageBody = string.Format(HtmlBody, "Our users reporeted you \n please readchatting rolse again and be carful" , "https://icones.pro/wp-content/uploads/2021/10/icone-de-rapport-avec-point-d-exclamation-rouge.png");
+
+            return massageBody;
         }
 
         public List<GetAllReportByUserName> GetAllByusername()
