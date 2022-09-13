@@ -39,5 +39,12 @@ namespace MessengerAPI.Controllers
             var result = contactUsService.InsertContact(contact);
             return Ok(result);
         }
+        [HttpDelete]
+        [Route("DeleteContact/{id}")]
+        public IActionResult DeleteContact(int id)
+        {
+            var result = contactUsService.DeleteContact(id);
+            return Ok(result);
+        }
     }
 }
