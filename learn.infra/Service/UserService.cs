@@ -137,7 +137,7 @@ namespace Messenger.infra.Service
 
             SmtpClient emailClinet = new SmtpClient();
             emailClinet.Connect("smtp.gmail.com", 465, true);
-            emailClinet.Authenticate("teeeeeestemail@gmail.com", "zvvugvfrinavklfj");
+            emailClinet.Authenticate("********", "********"); 
             emailClinet.Send(obj);
 
             emailClinet.Disconnect(true);
