@@ -23,9 +23,9 @@ namespace Messenger.infra.Repoisitory
         {
             var parameter = new DynamicParameters();
             parameter.Add
-                ("@crud", "D", dbType: DbType.Int32, direction: ParameterDirection.Input);
+                ("@crud", "D", dbType: DbType.String, direction: ParameterDirection.Input);
             parameter.Add
-                ("@CcontactUsId", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
+                ("@CcontactUsId", id, dbType: DbType.Int32, direction: ParameterDirection.Input); 
             var result = dBContext.dbConnection.ExecuteAsync
                 ("contactUsCRUD_Package.contactUsCRUD", parameter, commandType: CommandType.StoredProcedure);
 
