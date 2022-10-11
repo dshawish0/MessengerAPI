@@ -90,7 +90,7 @@ namespace learn.infra.Service
 
             SmtpClient emailClinet = new SmtpClient();
             emailClinet.Connect("smtp.gmail.com", 465, true);
-            emailClinet.Authenticate("********", "********");
+            emailClinet.Authenticate("deia3.123.ds@gmail.com", "lpuesonkyibstcqt");
             emailClinet.Send(obj);
 
             emailClinet.Disconnect(true);

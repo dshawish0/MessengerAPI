@@ -113,7 +113,7 @@ namespace MessengerAPI.Controllers
             {
                 var file = Request.Form.Files[0];
                 var fileName = Guid.NewGuid().ToString() + "_" + file.FileName;
-                var fullPath = Path.Combine("C:\\Users\\yazan\\OneDrive\\سطح المكتب\\New folder (2)\\MessengerAppUI\\src\\assets\\Img", fileName);
+                var fullPath = Path.Combine("D:\\MessengerAppUI\\src\\assets\\Img", fileName);
 
                 using (var stream = new FileStream(fullPath, FileMode.Create))
                 {
@@ -167,7 +167,7 @@ namespace MessengerAPI.Controllers
             {
                 var file = Request.Form.Files[0];
                 var fileName = Guid.NewGuid().ToString() + "_" + file.FileName;
-                var fullPath = Path.Combine("C:\\Users\\Mahmoud Bani-Hani\\Desktop\\FinalProject\\MessengerAppUI\\src\\assets\\Img", fileName);
+                var fullPath = Path.Combine("D:\\MessengerAppUI\\src\\assets\\Img", fileName);
 
                 using (var stream = new FileStream(fullPath, FileMode.Create))
                 {

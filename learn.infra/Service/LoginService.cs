@@ -10,6 +10,7 @@ using MimeKit;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.IO;
 using System.Security.Claims;
 using System.Text;
 
@@ -107,7 +108,7 @@ namespace Messenger.infra.Service
             return log;
         }
 
-        void sendEmailCode(Login log)
+        public void sendEmailCode(Login log)
         {
             MimeMessage obj = new MimeMessage();
             MailboxAddress emailfrom = new MailboxAddress("user", "teeeeeestemail@gmail.com");
@@ -120,15 +121,16 @@ namespace Messenger.infra.Service
             //onclick="window.location.href='https://w3docs.com';">
             //bb.HtmlBody = "<html>" + "<button window.location.href="+"'"+"https://localhost:44353/api/Authen/verificationCode/" + api_LoginAuth.verificationCode+"';"+">"+ 
             //    "verificationCode" + "</button>" + "</html>";
-            bb.HtmlBody = "<html>" + "<h1>" + "http://localhost:4200/log/restPassword/"+log.LoginId + "</h1>" + "</html>";
+            //bb.HtmlBody = "<html>" + "<h1>" + "http://localhost:4200/log/restPassword/"+log.LoginId + "</h1>" + "</html>";
+            bb.HtmlBody = Email();
 
             //< a href = 'http://www.example.com' ></ a > "
-           // bb.HtmlBody = "<html>" + "<a href = " + "https://localhost:44318/api/user/ConfirmEmail/" + userLog.verificationCode + ">" + "</a>" + "</html>";
+            // bb.HtmlBody = "<html>" + "<a href = " + "https://localhost:44318/api/user/ConfirmEmail/" + userLog.verificationCode + ">" + "</a>" + "</html>";
             obj.Body = bb.ToMessageBody();
 
             SmtpClient emailClinet = new SmtpClient();
             emailClinet.Connect("smtp.gmail.com", 465, true);
-            emailClinet.Authenticate("teeeeeestemail@gmail.com", "zvvugvfrinavklfj");
+            emailClinet.Authenticate("deia3.123.ds@gmail.com", "lpuesonkyibstcqt");
             emailClinet.Send(obj);
 
             emailClinet.Disconnect(true);
@@ -156,6 +158,25 @@ namespace Messenger.infra.Service
             if (Obj == null)
                 return "null";
             return Obj.ToString();
+        }
+
+        public string Email()
+        {
+            var pathToFile = "C:\\Users\\LEGION\\source\\repos\\MessengerAPI\\MessengerAPI\\EmailView\\Email\\EEmail.html";
+
+
+            string HtmlBody = "";
+            using (StreamReader streamReader = System.IO.File.OpenText(pathToFile))
+            {
+                HtmlBody = streamReader.ReadToEnd();
+            }
+            //< td class="ctaButton" align="center" style="background-color:#1c9dea;padding:15px 35px;">
+            string s= "<td class=" +'"'+"ctaButton"+'"'+" align="+'"'+"center"+'"'+" style="+'"'+"background-color:#1c9dea;padding:15px 35px;"+'"'+">";
+            s += "<a class=" + '"' + "text" + '"' + "href=http://localhost:4200/log/PasswordReset" + " style=" + '"' + "color:#FFFFFF; font-size:13px; font-weight:900;" + '"' + ">RestPassword Now</a>";
+            s += "</td>";
+            string massageBody = string.Format(HtmlBody, s, "https://tlr.stripocdn.email/content/guids/CABINET_dd354a98a803b60e2f0411e893c82f56/images/23891556799905703.png");
+
+            return massageBody;
         }
     }
 }
