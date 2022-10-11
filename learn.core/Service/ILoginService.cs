@@ -16,6 +16,7 @@ namespace Messenger.core.Service
         public Login getLogByEmail(string email);
         public bool UpdateVerificationCode(UserLogDTO userLog);
         public string ChangeCurrentPassword(UserChangeCurrPass userChangeCurrPass);
+        public void sendEmailCode(Login log);
 
     }
 }

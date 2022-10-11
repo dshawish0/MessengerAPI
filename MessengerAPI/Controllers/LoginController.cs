@@ -52,6 +52,15 @@ namespace MessengerAPI.Controllers
             return Ok(this.loginService.getLogByEmail(login.Email));
         }
 
+        [HttpPost]
+        [Route("getLogByEmaill")]
+        public IActionResult getLogByEmaill([FromBody] Login login)
+        {
+            var log = this.loginService.getLogByEmail(login.Email);
+            this.loginService.sendEmailCode(log);
+            return Ok(log);
+        }
+
         [HttpGet]
         [Route("UpdateVerificationCode")]
         public IActionResult UpdateVerificationCode()
